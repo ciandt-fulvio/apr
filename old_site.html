@@ -1,0 +1,1558 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@500&display=swap');
+
+  :root {
+    --navy: #000050;
+    --navy-2: #242459;
+    --navy-3: #393973;
+    --coral: #FA5A50;
+    --coral-dark: #D94A41;
+    --coral-light: #FA8982;
+    --coral-soft: #FAB8B4;
+    --pink: #FAB9FF;
+    --light-blue: #B4DCFA;
+    --light-blue-soft: #E8F2FC;
+    --deep-red: #690037;
+    --bg: #F8F8FB;
+    --surface: #FFFFFF;
+    --text: #1A1A2E;
+    --text-2: #4A4A65;
+    --text-3: #7A7A95;
+    --border: #E8E8EE;
+    --border-strong: #D5D5DE;
+    --sidebar-w: 280px;
+    --toc-w: 240px;
+    --topbar-h: 60px;
+    --shadow-1: 0 1px 3px rgba(0,0,80,0.05);
+    --shadow-2: 0 4px 14px rgba(0,0,80,0.07);
+    --shadow-3: 0 12px 28px rgba(0,0,80,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--topbar-h);
+    background: var(--navy);
+    color: white;
+    display: flex; align-items: center;
+    padding: 0 24px;
+    z-index: 100;
+    box-shadow: var(--shadow-2);
+  }
+  .topbar-logo {
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 600; font-size: 15px;
+    color: white; text-decoration: none;
+  }
+  .topbar-mark {
+    width: 30px; height: 30px;
+    background: var(--coral);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 14px;
+  }
+  .topbar-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .topbar-spacer { flex: 1; }
+  .topbar-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+  }
+  .menu-toggle {
+    display: none;
+    background: transparent; border: 0; color: white;
+    cursor: pointer; padding: 8px; margin-right: 4px;
+  }
+
+  /* ===== LAYOUT ===== */
+  .layout {
+    margin-top: var(--topbar-h);
+    display: grid;
+    grid-template-columns: var(--sidebar-w) minmax(0,1fr) var(--toc-w);
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: sticky; top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
+    overflow-y: auto;
+    padding: 28px 0 40px;
+  }
+  .sidebar-section { margin-bottom: 28px; }
+  .sidebar-label {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-3);
+    padding: 0 24px;
+    margin-bottom: 10px;
+  }
+  .sidebar-link {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 24px;
+    color: var(--text-2); text-decoration: none;
+    font-size: 13.5px;
+    border-left: 3px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+  .sidebar-link:hover { background: var(--light-blue-soft); color: var(--navy); }
+  .sidebar-link.active {
+    color: var(--coral); font-weight: 600;
+    border-left-color: var(--coral);
+    background: linear-gradient(to right, rgba(250,90,80,0.07), transparent 60%);
+  }
+  .sidebar-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-3); font-weight: 500;
+    min-width: 18px;
+  }
+  .sidebar-link.active .sidebar-num { color: var(--coral); }
+
+  /* ===== CONTENT ===== */
+  .content-wrap {
+    padding: 56px 64px 96px;
+    max-width: 920px;
+  }
+  .page { display: none; animation: fadein 0.25s ease; }
+  .page.active { display: block; }
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Typography */
+  .eyebrow {
+    color: var(--coral);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .display-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 56px; line-height: 1.05;
+    color: var(--navy);
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  .display-title em {
+    font-style: italic;
+    color: var(--coral);
+    font-weight: 500;
+  }
+  .lead {
+    font-size: 18.5px; line-height: 1.55;
+    color: var(--text-2);
+    margin-bottom: 36px;
+    max-width: 72ch;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 32px; line-height: 1.18;
+    color: var(--navy);
+    margin: 56px 0 16px;
+    letter-spacing: -0.015em;
+    scroll-margin-top: 80px;
+  }
+  h3 {
+    font-size: 18px; font-weight: 600;
+    color: var(--navy);
+    margin: 32px 0 10px;
+    scroll-margin-top: 80px;
+  }
+  h4 {
+    font-size: 14.5px; font-weight: 600;
+    color: var(--navy-2);
+    margin: 24px 0 8px;
+    letter-spacing: 0.005em;
+  }
+  p { margin-bottom: 16px; color: var(--text); }
+  p strong, li strong { color: var(--navy); font-weight: 600; }
+  ul, ol { margin: 0 0 18px 22px; }
+  li { margin-bottom: 10px; }
+  li::marker { color: var(--coral); }
+  ol li::marker { color: var(--navy-3); font-weight: 600; }
+  em { color: var(--navy-3); }
+  a.inline { color: var(--coral); text-decoration: none; border-bottom: 1px solid rgba(250,90,80,0.3); }
+  a.inline:hover { border-bottom-color: var(--coral); }
+
+  /* Callouts */
+  .callout {
+    background: var(--light-blue-soft);
+    border-left: 4px solid var(--light-blue);
+    padding: 18px 22px;
+    border-radius: 0 10px 10px 0;
+    margin: 24px 0;
+  }
+  .callout.coral { background: rgba(250,90,80,0.06); border-left-color: var(--coral); }
+  .callout.navy { background: rgba(0,0,80,0.04); border-left-color: var(--navy-3); }
+  .callout-title {
+    font-weight: 700; color: var(--navy);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13.5px; letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .callout-icon {
+    width: 18px; height: 18px;
+    display: grid; place-items: center;
+    color: var(--coral);
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Hero on home */
+  .hero {
+    padding: 16px 0 8px;
+  }
+  .hero-tagline {
+    display: inline-flex; gap: 8px; align-items: center;
+    padding: 6px 14px;
+    background: rgba(250,90,80,0.08);
+    color: var(--coral-dark);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 22px;
+  }
+  .hero-tagline-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--coral);
+  }
+
+  /* Infographic */
+  .infographic-wrap {
+    margin: 36px 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow-2);
+  }
+  .infographic-wrap img {
+    width: 100%; height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+  .infographic-caption {
+    text-align: center;
+    font-size: 12.5px; color: var(--text-3);
+    margin-top: 14px;
+    letter-spacing: 0.02em;
+  }
+  .infographic-fallback {
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Phase grid */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .phase-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .phase-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+    border-color: var(--coral-soft);
+  }
+  .phase-card:hover::before { background: var(--coral); }
+  .phase-card-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .phase-card-num {
+    width: 30px; height: 30px;
+    background: var(--navy);
+    color: white;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .phase-card:hover .phase-card-num { background: var(--coral); }
+  .phase-card-movement {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .phase-card-title {
+    font-weight: 700; color: var(--navy);
+    font-size: 16.5px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .phase-card-desc {
+    font-size: 13.5px; color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  /* Movements */
+  .movements {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; margin: 28px 0;
+  }
+  .movement {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .movement-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px; font-weight: 500;
+    color: var(--coral);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .movement-title {
+    font-weight: 700; color: var(--navy);
+    font-size: 16px; margin-bottom: 8px;
+  }
+  .movement-range {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    color: var(--text-3);
+    margin-bottom: 8px;
+  }
+  .movement-desc { font-size: 13.5px; color: var(--text-2); }
+
+  /* Differentiators */
+  .diff-list {
+    display: grid; gap: 14px;
+    margin: 28px 0;
+  }
+  .diff-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .diff-icon {
+    width: 36px; height: 36px;
+    background: var(--coral);
+    border-radius: 10px;
+    color: white;
+    display: grid; place-items: center;
+    font-weight: 700;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+  }
+  .diff-title { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .diff-desc { color: var(--text-2); font-size: 14px; }
+
+  /* Squad */
+  .squad-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin: 24px 0;
+  }
+  .squad-col {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    border: 1px solid var(--border);
+  }
+  .squad-col h4 {
+    margin-top: 0;
+    color: var(--coral);
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .squad-col ul { margin: 12px 0 0 18px; }
+  .squad-col li { font-size: 14px; }
+
+  /* Output box */
+  .output-box {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 36px 0;
+  }
+  .output-box h3, .output-box h2 {
+    color: white; margin-top: 0;
+  }
+  .output-box p { color: rgba(255,255,255,0.85); }
+  .output-box strong { color: white; }
+  .output-box ul li { color: rgba(255,255,255,0.85); }
+  .output-box li::marker { color: var(--coral-light); }
+  .output-label {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--coral-light); font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  /* Page nav */
+  .page-nav {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 64px 0 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .page-nav-link {
+    padding: 18px 22px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .page-nav-link:hover {
+    border-color: var(--coral);
+    background: rgba(250,90,80,0.03);
+  }
+  .page-nav-label {
+    font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3); font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .page-nav-title { font-weight: 600; color: var(--navy); font-size: 15px; }
+  .page-nav-link.next { text-align: right; }
+
+  /* Big quote / principle */
+  .principle {
+    background: white;
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .principle-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 64px; line-height: 0.5;
+    color: var(--coral);
+    position: absolute;
+    top: 28px; left: 24px;
+    opacity: 0.6;
+  }
+  .principle-text {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; line-height: 1.5;
+    color: var(--navy);
+    padding-left: 32px;
+  }
+  .principle-text em { color: var(--coral); font-style: italic; }
+
+  /* TOC */
+  .toc {
+    position: sticky;
+    top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
+    overflow-y: auto;
+    padding: 56px 24px 32px;
+    border-left: 1px solid var(--border);
+  }
+  .toc-label {
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 14px;
+  }
+  .toc-list a {
+    display: block;
+    padding: 4px 0 4px 12px;
+    color: var(--text-3);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 2px solid var(--border);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .toc-list a:hover { color: var(--navy); }
+  .toc-list a.active {
+    color: var(--coral);
+    border-left-color: var(--coral);
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.7);
+    padding: 32px 64px;
+    font-size: 13px;
+    grid-column: 1 / -1;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-strong { color: white; font-weight: 600; }
+
+  /* Cycle banner on home */
+  .cycle-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--deep-red) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center; gap: 24px;
+  }
+  .cycle-banner-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .cycle-banner-text { font-size: 14.5px; color: rgba(255,255,255,0.85); max-width: 60ch; }
+  .cycle-banner-icon { font-size: 64px; opacity: 0.9; }
+
+  /* Responsive */
+  @media (max-width: 1180px) {
+    .toc { display: none; }
+    .layout { grid-template-columns: var(--sidebar-w) minmax(0,1fr); }
+    .content-wrap { padding: 48px 48px 80px; }
+  }
+  @media (max-width: 860px) {
+    .menu-toggle { display: block; }
+    .sidebar {
+      position: fixed; top: var(--topbar-h); left: 0;
+      width: 280px;
+      transform: translateX(-100%);
+      transition: transform 0.25s;
+      z-index: 90;
+      box-shadow: var(--shadow-3);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .layout { grid-template-columns: 1fr; }
+    .content-wrap { padding: 32px 24px 64px; }
+    .display-title { font-size: 38px; }
+    .lead { font-size: 16px; }
+    h2 { font-size: 26px; }
+    .movements { grid-template-columns: 1fr; }
+    .squad-grid { grid-template-columns: 1fr; }
+    .cycle-banner { grid-template-columns: 1fr; }
+    .page-nav { grid-template-columns: 1fr; }
+    .page-nav-link.next { text-align: left; }
+  }
+</style>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a class="topbar-logo" data-route="home">
+    <div class="topbar-mark">R</div>
+    <div class="topbar-title">Reinvenção Agêntica de Processos</div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-meta">Framework v1.0</div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Visão geral</div>
+      <a class="sidebar-link" data-route="home"><span class="sidebar-num">→</span> Home</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Descoberta e definição</div>
+      <a class="sidebar-link" data-route="fase-1"><span class="sidebar-num">01</span> Assessment Agêntico</a>
+      <a class="sidebar-link" data-route="fase-2"><span class="sidebar-num">02</span> Visão Future-Back</a>
+      <a class="sidebar-link" data-route="fase-3"><span class="sidebar-num">03</span> Pareto e Priorização</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Construção e validação</div>
+      <a class="sidebar-link" data-route="fase-4"><span class="sidebar-num">04</span> Codificação do humano</a>
+      <a class="sidebar-link" data-route="fase-5"><span class="sidebar-num">05</span> Primitivas agênticas</a>
+      <a class="sidebar-link" data-route="fase-6"><span class="sidebar-num">06</span> Experimento em campo</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Escala e composição</div>
+      <a class="sidebar-link" data-route="fase-7"><span class="sidebar-num">07</span> Escala e operação</a>
+      <a class="sidebar-link" data-route="fase-8"><span class="sidebar-num">08</span> Evolução contínua</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Apêndices</div>
+      <a class="sidebar-link" data-route="diferenciais"><span class="sidebar-num">A</span> Diferenciais</a>
+      <a class="sidebar-link" data-route="squad"><span class="sidebar-num">B</span> Squad sugerida</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content-wrap">
+
+    <!-- ============ HOME ============ -->
+    <section class="page active" id="page-home" data-toc='[
+      {"id":"intro","label":"Introdução"},
+      {"id":"diagrama","label":"O processo visual"},
+      {"id":"principio","label":"Princípio orientador"},
+      {"id":"movimentos","label":"Os 3 movimentos"},
+      {"id":"fases","label":"As 8 fases"},
+      {"id":"diferenciais","label":"O que torna diferente"},
+      {"id":"squad","label":"Squad sugerida"}
+    ]'>
+      <div class="hero">
+        <div class="hero-tagline"><span class="hero-tagline-dot"></span> Framework de transformação</div>
+        <h1 class="display-title">Reinvenção <em>Agêntica</em> de Processos</h1>
+        <p class="lead">Um método para repensar processos operacionais a partir de uma mentalidade <em>future-back</em> e agêntica — não como otimização das etapas existentes, mas como redesenho do que o processo poderia ser se nascesse hoje, num mundo onde agentes de IA são cidadãos de primeira classe da operação.</p>
+      </div>
+
+      <h2 id="intro">Por que este framework existe</h2>
+      <p>A maior parte das iniciativas de IA em operações começa pelo lugar errado: pega o processo atual e tenta encaixar IA por cima. O resultado é otimização disfarçada de inovação — ganhos marginais, sem mudar a economia da operação.</p>
+      <p>Este framework propõe o contrário: <strong>partir do destino</strong> — como o processo seria se desenhado hoje, com agentes desde o primeiro traço — e chegar lá por <strong>ciclos curtos e mensuráveis</strong>, não por <em>big bang</em>. Cada ciclo entrega um pedaço protótipo do futuro rodando no presente, gera aprendizado codificado em ativos reutilizáveis, e barateia o ciclo seguinte.</p>
+
+      <h2 id="diagrama">O processo, em um diagrama</h2>
+      <p>As oito fases formam um ciclo iterativo, não uma linha reta. A primeira volta é a mais investigativa; as seguintes ficam progressivamente mais executivas, porque já existem vocabulário, plataforma e padrões codificados.</p>
+
+      <div class="infographic-wrap">
+        <img id="infographic-img" alt="Diagrama do ciclo iterativo de valor — 8 fases da reinvenção agêntica de processos" style="display:none"/>
+        <div id="infographic-fallback" class="infographic-fallback">
+          <svg width="100%" height="100%" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FA5A50"/>
+                <stop offset="100%" stop-color="#D94A41"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(400 250)">
+              <circle r="170" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-dasharray="4 6"/>
+              <text text-anchor="middle" y="6" fill="white" font-family="Fraunces, serif" font-size="22" font-style="italic">ciclo de valor</text>
+            </g>
+            <g font-family="Inter, sans-serif" font-weight="700" fill="white" font-size="14">
+              <g transform="translate(400 60)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">01</text></g>
+              <g transform="translate(560 130)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">02</text></g>
+              <g transform="translate(620 250)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">03</text></g>
+              <g transform="translate(560 370)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">04</text></g>
+              <g transform="translate(400 440)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">05</text></g>
+              <g transform="translate(240 370)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">06</text></g>
+              <g transform="translate(180 250)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">07</text></g>
+              <g transform="translate(240 130)"><circle r="28" fill="url(#g1)"/><text text-anchor="middle" y="5">08</text></g>
+            </g>
+          </svg>
+        </div>
+        <div class="infographic-caption">Ciclo iterativo de valor — descobrir, codificar, operar, evoluir.</div>
+      </div>
+
+      <h2 id="principio">Princípio orientador</h2>
+      <div class="principle">
+        <div class="principle-mark">"</div>
+        <div class="principle-text">Entender como o melhor humano faz hoje → traduzir para <em>primitivas de IA</em> (skills, agentes, comandos, orquestração) → usar IA no próprio processo para acelerar a descoberta e a codificação.</div>
+      </div>
+      <p>Não é "colocar IA em cima do processo atual"; é repensar o processo partindo do que ele <em>poderia</em> ser se nascesse hoje, num mundo agêntico — mas chegando lá por incrementos mensuráveis.</p>
+
+      <h2 id="movimentos">Os 3 movimentos</h2>
+      <div class="movements">
+        <div class="movement">
+          <div class="movement-num">I</div>
+          <div class="movement-range">Fases 01 — 03</div>
+          <div class="movement-title">Descoberta e definição</div>
+          <div class="movement-desc">Entender o estado atual, projetar o estado futuro, escolher onde atacar primeiro.</div>
+        </div>
+        <div class="movement">
+          <div class="movement-num">II</div>
+          <div class="movement-range">Fases 04 — 06</div>
+          <div class="movement-title">Construção e validação</div>
+          <div class="movement-desc">Codificar como o melhor humano faz, traduzir para primitivas agênticas, experimentar em campo.</div>
+        </div>
+        <div class="movement">
+          <div class="movement-num">III</div>
+          <div class="movement-range">Fases 07 — 08</div>
+          <div class="movement-title">Escala e composição</div>
+          <div class="movement-desc">Colocar em produção, redefinir operação, evoluir continuamente e capitalizar aprendizado.</div>
+        </div>
+      </div>
+
+      <h2 id="fases">As 8 fases</h2>
+      <div class="phase-grid">
+        <a class="phase-card" data-route="fase-1">
+          <div class="phase-card-head"><div class="phase-card-num">01</div><div class="phase-card-movement">Descoberta</div></div>
+          <div class="phase-card-title">Assessment Agêntico</div>
+          <div class="phase-card-desc">Agentes entrevistam e consolidam o AS-IS. Humanos seniores interpretam e desafiam.</div>
+        </a>
+        <a class="phase-card" data-route="fase-2">
+          <div class="phase-card-head"><div class="phase-card-num">02</div><div class="phase-card-movement">Descoberta</div></div>
+          <div class="phase-card-title">Visão Future-Back</div>
+          <div class="phase-card-desc">Workshop estruturado para imaginar três variações de TO-BE — conservadora, moderada, radical.</div>
+        </a>
+        <a class="phase-card" data-route="fase-3">
+          <div class="phase-card-head"><div class="phase-card-num">03</div><div class="phase-card-movement">Descoberta</div></div>
+          <div class="phase-card-title">Pareto e Priorização</div>
+          <div class="phase-card-desc">Escolher um experimento por iteração, com critérios de sucesso definidos antes.</div>
+        </a>
+        <a class="phase-card" data-route="fase-4">
+          <div class="phase-card-head"><div class="phase-card-num">04</div><div class="phase-card-movement">Construção</div></div>
+          <div class="phase-card-title">Codificação do humano</div>
+          <div class="phase-card-desc">Observar os top performers e capturar decisões, critérios, atalhos e exceções.</div>
+        </a>
+        <a class="phase-card" data-route="fase-5">
+          <div class="phase-card-head"><div class="phase-card-num">05</div><div class="phase-card-movement">Construção</div></div>
+          <div class="phase-card-title">Primitivas agênticas</div>
+          <div class="phase-card-desc">Traduzir conhecimento em tools, skills, agentes e orquestração — com HITL desenhado.</div>
+        </a>
+        <a class="phase-card" data-route="fase-6">
+          <div class="phase-card-head"><div class="phase-card-num">06</div><div class="phase-card-movement">Construção</div></div>
+          <div class="phase-card-title">Experimento em campo</div>
+          <div class="phase-card-desc">Engenheiros embedados constroem rápido, com a operação real e instrumentação desde o dia 1.</div>
+        </a>
+        <a class="phase-card" data-route="fase-7">
+          <div class="phase-card-head"><div class="phase-card-num">07</div><div class="phase-card-movement">Escala</div></div>
+          <div class="phase-card-title">Escala e operação</div>
+          <div class="phase-card-desc">Hardening técnico, rollout controlado e redesenho explícito de papéis humanos.</div>
+        </a>
+        <a class="phase-card" data-route="fase-8">
+          <div class="phase-card-head"><div class="phase-card-num">08</div><div class="phase-card-movement">Escala</div></div>
+          <div class="phase-card-title">Evolução contínua</div>
+          <div class="phase-card-desc">Reavaliar modelos, evoluir o repositório de skills, capitalizar aprendizado em todos os ciclos.</div>
+        </a>
+      </div>
+
+      <div class="cycle-banner">
+        <div>
+          <div class="cycle-banner-title">Um ciclo contínuo que transforma conhecimento em vantagem competitiva</div>
+          <div class="cycle-banner-text">Cada volta entrega valor mensurável num pedaço (o Pareto da vez), gera aprendizado e alimenta a próxima iteração. Skills e agentes construídos para um processo se reutilizam em outros — o segundo ciclo é mais rápido que o primeiro, o terceiro mais que o segundo.</div>
+        </div>
+        <div class="cycle-banner-icon">∞</div>
+      </div>
+
+      <h2 id="diferenciais">O que torna este processo diferente</h2>
+      <div class="diff-list">
+        <div class="diff-item">
+          <div class="diff-icon">1</div>
+          <div>
+            <div class="diff-title">IA no <em>processo</em>, não só no produto</div>
+            <div class="diff-desc">O assessment é feito por agente, a documentação do AS-IS é acelerada por IA, a codificação de skills usa IA para extrair padrões. <em>Future-back</em> aplicado também a como o trabalho é feito.</div>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">2</div>
+          <div>
+            <div class="diff-title">Conhecimento codificado em skills, não em pessoas</div>
+            <div class="diff-desc">Quando alguém novo entra no time, não precisa fazer curso e ser avaliado por meses — usa as skills e, ao usar, já está aplicando a melhor prática.</div>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">3</div>
+          <div>
+            <div class="diff-title">Entrega incremental, mas disruptiva</div>
+            <div class="diff-desc">Cada ciclo entrega um pedaço protótipo do futuro rodando no presente — não um número de eficiência num slide.</div>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">4</div>
+          <div>
+            <div class="diff-title">Aprendizado que se compõe</div>
+            <div class="diff-desc">Skills, agentes e padrões de orquestração viram acervo institucional. Cada ciclo barateia o próximo — vira capacidade instalada, não projeto isolado.</div>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">5</div>
+          <div>
+            <div class="diff-title">Governança e confiança por design</div>
+            <div class="diff-desc">Métricas, qualidade, auditoria e human-in-the-loop são partes do desenho — não anexos. Reavaliação contínua de modelos torna a operação mais barata e melhor com o tempo.</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 id="squad">Squad sugerida</h2>
+      <p>Time enxuto, misto entre parceiro de transformação e organização cliente. Seis pessoas é uma boa referência — não trinta.</p>
+      <div class="squad-grid">
+        <div class="squad-col">
+          <h4>Parceiro de transformação</h4>
+          <ul>
+            <li><strong>Orquestrador</strong> — lidera o método, conduz a Fase 2, garante coerência entre as fases.</li>
+            <li><strong>1 a 2 Engenheiros Embedados</strong> — perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final.</li>
+            <li><strong>AIX</strong> — desenho de interação humano-agente, especialmente nos pontos de HITL.</li>
+          </ul>
+        </div>
+        <div class="squad-col">
+          <h4>Organização cliente</h4>
+          <ul>
+            <li><strong>PM / dono(s) do processo</strong> — fonte de verdade sobre objetivos e prioridades.</li>
+            <li><strong>Acesso garantido aos operadores reais</strong> — sem isso, o modelo embedado não funciona. Não é um papel: é uma condição contratual.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <div></div>
+        <a class="page-nav-link next" data-route="fase-1">
+          <div class="page-nav-label">Começar pelo início →</div>
+          <div class="page-nav-title">Fase 01 · Assessment Agêntico</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 1 ============ -->
+    <section class="page" id="page-fase-1" data-toc='[
+      {"id":"f1-mudanca","label":"O que muda em relação ao clássico"},
+      {"id":"f1-pecas","label":"Como funciona, em três peças"},
+      {"id":"f1-saida","label":"O que precisa estar claro na saída"}
+    ]'>
+      <div class="eyebrow">Fase 01 · Descoberta e definição</div>
+      <h1 class="display-title">Assessment <em>Agêntico</em></h1>
+      <p class="lead">Entender o estado atual em semanas, não meses — usando IA para fazer o trabalho braçal e humanos seniores para interpretar e desafiar os achados.</p>
+
+      <h2 id="f1-mudanca">O ponto de partida e o que muda em relação ao assessment clássico</h2>
+      <p>O assessment tradicional num projeto de processo é caro, lento e dependente de poucos consultores sêniores. São semanas (ou meses) de entrevistas, workshops de AS-IS, validação, retrabalho.</p>
+      <p>Foi assim que iniciativas pioneiras foram feitas "na mão". Funcionou — mas é <strong>insustentável</strong> quando se quer atacar 5, 10, 15 processos do back-office em paralelo. O assessment agêntico inverte essa equação: o trabalho braçal (entrevista, transcrição, consolidação, geração de artefatos) é feito por agentes; os humanos sêniores focam em <strong>interpretar e desafiar</strong> os achados, não em produzi-los.</p>
+
+      <h2 id="f1-pecas">Como funciona, em três peças</h2>
+
+      <h3>1. Agente entrevistador</h3>
+      <p>Conduz entrevistas estruturadas em escala — pode ser falado ou textual, sequencial ou em paralelo com vários stakeholders. Tem repertório para perguntas de aprofundamento, identificação de stakeholders adjacentes, e mapeamento de sistemas envolvidos.</p>
+      <p>O ganho não é só velocidade: é <strong>padronização</strong>. Todo entrevistado responde aos mesmos cortes de pergunta, o que torna a consolidação posterior viável.</p>
+
+      <h3>2. Agente consolidador</h3>
+      <p>Recebe o conjunto de entrevistas e produz:</p>
+      <ul>
+        <li>Blueprint do AS-IS;</li>
+        <li>Mapa de dores quantificado;</li>
+        <li>Inventário de sistemas e integrações;</li>
+        <li>Lista de stakeholders e seus papéis;</li>
+        <li>E — talvez o mais importante — <strong>hipóteses iniciais de oportunidade</strong> com IA, marcando onde estão os candidatos óbvios e os não-óbvios.</li>
+      </ul>
+
+      <h3>3. Revisão humana sênior</h3>
+      <p>Curta e focada. O time (orquestrador + AIX, tipicamente) olha o output do consolidador, desafia, completa lacunas, e valida com o cliente num <strong>único workshop de fechamento</strong>. O papel do humano aqui é o de editor crítico — não de autor.</p>
+
+      <div class="callout coral">
+        <div class="callout-title">⏱ Duração esperada</div>
+        <p><strong>2 a 4 semanas</strong> em processo de complexidade média, contra os 2 a 3 meses de um assessment tradicional. Essa diferença é, em si, parte do que torna o método vendável: a velocidade é a evidência de que o modelo é diferente.</p>
+      </div>
+
+      <h2 id="f1-saida">O que precisa estar claro na saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefatos desta fase</div>
+        <ul>
+          <li><strong>Blueprint do processo</strong> — fluxo do AS-IS com etapas, sistemas, atores, volumetria por etapa e tempo médio. Sem isso, a Fase 3 não consegue identificar Pareto.</li>
+          <li><strong>Mapa de dores</strong> — onde está o atrito, quem sente, com que frequência e qual o custo. Idealmente já quantificado, mesmo que com estimativas grosseiras.</li>
+          <li><strong>Inventário de stakeholders e sistemas</strong> — quem precisa estar na Fase 2 e quais sistemas vão precisar de integração na Fase 5.</li>
+          <li><strong>Hipóteses iniciais de oportunidade</strong> — lista bruta de "aqui dá pra fazer X com IA", priorizada apenas em alto nível. Insumo para a Fase 3, não conclusão.</li>
+        </ul>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="home"><div class="page-nav-label">← Voltar para</div><div class="page-nav-title">Visão geral</div></a>
+        <a class="page-nav-link next" data-route="fase-2"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">02 · Visão Future-Back</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 2 ============ -->
+    <section class="page" id="page-fase-2" data-toc='[
+      {"id":"f2-oque","label":"O que é future-back de verdade"},
+      {"id":"f2-conduzir","label":"Como conduzir, na prática"},
+      {"id":"f2-ia","label":"IA no próprio workshop"},
+      {"id":"f2-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 02 · Descoberta e definição</div>
+      <h1 class="display-title">Visão <em>Future-Back</em></h1>
+      <p class="lead">Começar pelo destino, não pela origem. Um workshop estruturado para imaginar três variações do TO-BE agêntico — antes que o instinto de otimização contamine o desenho.</p>
+
+      <h2 id="f2-oque">O que é "future-back" de verdade (e o que não é)</h2>
+      <p>Future-back é começar pelo destino, não pela origem. A pergunta clássica de otimização é <em>"como melhoramos este processo?"</em>. A pergunta future-back é <em>"se este processo nascesse hoje, num mundo AI-native, com agentes como cidadãos de primeira classe da operação, ele teria que forma?"</em>.</p>
+      <p>A diferença não é semântica — ela <strong>libera o desenho de prisões invisíveis</strong> quando se parte do AS-IS: organogramas existentes, contratos com fornecedores, divisões funcionais que só existem porque o trabalho é manual.</p>
+      <div class="callout">
+        <div class="callout-title">⚠ Risco principal</div>
+        <p>O time interpretar a Fase 2 como retórica e responder com <strong>otimização disfarçada de inovação</strong>. A fase tem que ser desenhada para forçar a ruptura — três variações obrigatórias garantem isso.</p>
+      </div>
+
+      <h2 id="f2-conduzir">Como conduzir, na prática</h2>
+      <p>Um workshop estruturado em três blocos, conduzido por facilitador sênior com participação dos stakeholders-chave do processo e — crítico — de pelo menos uma pessoa <strong>de fora do processo</strong> (alguém que olhe com olhos limpos).</p>
+
+      <h3>Bloco 1 · Ancoragem em outcomes, não em etapas</h3>
+      <p>Começa-se pelos resultados que o processo entrega ao cliente final (interno ou externo). Quais são? Quem se beneficia? Qual seria o estado radical desses outcomes daqui a 3 anos? Esse bloco existe para evitar que o grupo desça imediatamente para "como o processo funcionaria" antes de questionar "por que ele existe".</p>
+
+      <h3>Bloco 2 · Estímulo com referências</h3>
+      <p>Mostrar deliberadamente 2 a 3 referências de operações AI-native — casos de organizações reinventando suas operações comerciais, casos análogos no setor, casos validados de transformação radical em processos similares.</p>
+      <p>O propósito não é copiar — é <strong>expandir o vocabulário do possível</strong>. Sem isso, o grupo só consegue imaginar o que já viu.</p>
+
+      <h3>Bloco 3 · TO-BE em três variações</h3>
+      <p>Em vez de pedir "o desenho do futuro" (que sempre converge para algo morno), pedir três variações:</p>
+      <ul>
+        <li><strong>Conservadora</strong> — IA acelera o processo atual, mas a forma do trabalho permanece reconhecível.</li>
+        <li><strong>Moderada</strong> — a IA elimina partes do processo e redesenha outras; algumas funções desaparecem, novas surgem.</li>
+        <li><strong>Radical</strong> — o processo praticamente não existe mais. Foi absorvido por agentes operando em background, com humanos apenas nos pontos de decisão de alto risco.</li>
+      </ul>
+      <p>Forçar as três obriga o grupo a confrontar o que está deixando na mesa em cada uma.</p>
+
+      <h2 id="f2-ia">O uso de IA no próprio workshop</h2>
+      <p>A Fase 2 também é acelerada com IA: modelos de fronteira são usados em sala para gerar <strong>mockups rápidos</strong> do TO-BE em cada variação, simular conversas entre agentes do desenho proposto, e produzir um <strong>documento síntese</strong> das três variações ao final.</p>
+      <p>O grupo sai do workshop com artefatos visuais e narrativos — não com post-its e atas.</p>
+
+      <h2 id="f2-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefatos desta fase</div>
+        <p>Três visões TO-BE descritas em <strong>nível conceitual</strong> (não em arquitetura ainda), com <strong>hipóteses disruptivas</strong> explícitas — afirmações tipo:</p>
+        <ul>
+          <li><em>"Se isso funcionar, a função X deixa de existir."</em></li>
+          <li><em>"Esse trabalho de 200 pessoas vira responsabilidade de um agente com 10 humanos no loop."</em></li>
+        </ul>
+        <p>As hipóteses são o <strong>insumo principal da Fase 3</strong>: cada uma é candidata a virar um experimento que vale a pena rodar.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-1"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">01 · Assessment Agêntico</div></a>
+        <a class="page-nav-link next" data-route="fase-3"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">03 · Pareto e Priorização</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 3 ============ -->
+    <section class="page" id="page-fase-3" data-toc='[
+      {"id":"f3-tensao","label":"A tensão central"},
+      {"id":"f3-criterios","label":"Critérios de priorização"},
+      {"id":"f3-decidir","label":"Como decidir, em prática"},
+      {"id":"f3-sucesso","label":"Critérios de sucesso"},
+      {"id":"f3-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 03 · Descoberta e definição</div>
+      <h1 class="display-title">Pareto e <em>Priorização</em></h1>
+      <p class="lead">Escolher onde atacar primeiro — entre o pedaço que gera mais valor e o que melhor demonstra o futuro. Um experimento por iteração, com critérios de sucesso definidos antes.</p>
+
+      <h2 id="f3-tensao">A tensão central desta fase</h2>
+      <p>A Fase 3 carrega uma tensão que precisa ser <strong>explicitada</strong>, não escondida.</p>
+      <p>De um lado, o instinto certo de buscar <strong>Pareto</strong>: atacar o pedaço que gera mais valor — em casos de referência, foi assim que se identificou que uma única etapa consumia 50% do tempo da esteira.</p>
+      <p>De outro, o pedido típico de patrocinadores de transformação: <em>demonstração do futuro</em>, mesmo que num pedaço menor — "aqui esse pedaço a gente tem um experimento que de repente nem tá pegando 100% ainda dos casos, mas ele tá pegando um tanto e tem um resultado <em>muito diferente</em>, promissor".</p>
+      <div class="callout coral">
+        <div class="callout-title">⚖ Dois objetivos competem</div>
+        <p>Atacar o maior gargalo costuma ser robusto, mas pouco visível. Prototipar o future-back costuma ser visível, mas menos impactante no curto prazo. A Fase 3 não escolhe um — escolhe <strong>a combinação certa para o contexto e o sponsor</strong>.</p>
+      </div>
+
+      <h2 id="f3-criterios">Critérios de priorização</h2>
+      <p>Em vez de uma matriz genérica de impacto x esforço, cinco critérios explícitos:</p>
+      <ul>
+        <li><strong>Impacto operacional</strong> — quanto OPEX ou tempo de ciclo o experimento libera se funcionar.</li>
+        <li><strong>Valor demonstrativo</strong> — quanto o experimento, mesmo em pequena escala, <em>mostra o futuro</em>. Um experimento que reduz 10% do custo mas exemplifica de forma cristalina o modelo agêntico pode ser mais valioso, naquele momento, do que um que reduz 40% mas é indistinguível de automação tradicional.</li>
+        <li><strong>Viabilidade técnica</strong> — existem skills/agentes já maduros que aceleram a construção? Os sistemas envolvidos têm APIs decentes? O dado existe?</li>
+        <li><strong>Risco e reversibilidade</strong> — se der errado, qual o estrago? Processos críticos com risco regulatório pesam diferente de processos internos.</li>
+        <li><strong>Aprendizado gerado</strong> — o experimento ensina coisa que serve para os próximos? Skills que vão para o repositório institucional? Padrões de orquestração reutilizáveis? Crucial nas primeiras iterações.</li>
+      </ul>
+
+      <h2 id="f3-decidir">Como decidir, em prática</h2>
+      <p>Pegar as hipóteses disruptivas da Fase 2 mais as oportunidades brutas da Fase 1, e fazer uma sessão de <strong>scoring rápida</strong> com os critérios acima. Não precisa ser elaborada — uma matriz simples, com peso ajustado conforme o patrocinador.</p>
+      <div class="callout">
+        <div class="callout-title">⭐ Regra de ouro</div>
+        <p>Escolher <strong>um</strong> experimento para a primeira iteração. Não dois, não três. <strong>Um.</strong> A tentação de paralelizar é exatamente o que afunda esse tipo de iniciativa — dilui o time, perde foco, e produz vários protótipos meia-boca em vez de um caso de sucesso defensável. Quando o primeiro ciclo termina, a segunda iteração já pode começar com mais paralelismo, porque há plataforma e padrões.</p>
+      </div>
+
+      <h2 id="f3-sucesso">Critérios de sucesso definidos antes</h2>
+      <p>Antes do experimento começar, é <strong>obrigatório</strong> definir:</p>
+      <ul>
+        <li>Que métricas vamos medir;</li>
+        <li>Qual a baseline atual;</li>
+        <li>Qual o valor mínimo para considerar "funcionou";</li>
+        <li>Qual o valor para considerar "funcionou muito bem";</li>
+        <li>Como o engenheiro embedado da Fase 6 vai instrumentar isso desde o dia um.</li>
+      </ul>
+      <p>Sem isso, a fase de medição vira atividade pós-rollout — e é exatamente onde projetos de IA mais frequentemente perdem narrativa de sucesso.</p>
+
+      <h2 id="f3-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefato desta fase</div>
+        <p>Um documento curto: a <strong>carta de experimento</strong>. Contém:</p>
+        <ul>
+          <li>O problema escolhido;</li>
+          <li>A hipótese a testar;</li>
+          <li>Os critérios de sucesso quantificados;</li>
+          <li>O tempo-caixa máximo (ex.: 8 semanas);</li>
+          <li>A squad alocada;</li>
+          <li>E — explicitamente — o que <strong>não</strong> está no escopo.</li>
+        </ul>
+        <p>Esta carta é o contrato entre parceiro e cliente para a iteração que vai começar. As Fases 4 a 7 se executam contra ela.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-2"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">02 · Visão Future-Back</div></a>
+        <a class="page-nav-link next" data-route="fase-4"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">04 · Codificação do humano</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 4 ============ -->
+    <section class="page" id="page-fase-4" data-toc='[
+      {"id":"f4-quem","label":"Quem observar"},
+      {"id":"f4-capturar","label":"O que capturar"},
+      {"id":"f4-como","label":"Como capturar"},
+      {"id":"f4-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 04 · Construção e validação</div>
+      <h1 class="display-title">Codificação do <em>como o humano faz</em></h1>
+      <p class="lead">Observar os melhores operadores e capturar o que ninguém escreveu — decisões, critérios, atalhos e exceções que diferenciam o bom do excelente.</p>
+
+      <h2 id="f4-quem">Quem observar (e por que isso importa)</h2>
+      <p>A escolha das pessoas observadas determina a qualidade de tudo o que vem depois. Não é o operador médio — é o <strong>top performer</strong>: aquele(a) que tem menos retrabalho, decide mais rápido nos casos complexos, e tem a reputação interna de "é com fulano que eu confio quando o caso é difícil".</p>
+      <p>A razão é simples: a IA vai herdar o que for codificado. Se você codifica prática mediana, você escala prática mediana. E é exatamente onde muitos projetos de IA dão errado — automatizam o que está no manual, não o que o melhor humano <em>efetivamente faz</em>.</p>
+      <div class="callout">
+        <div class="callout-title">👥 Quantos observar</div>
+        <p>Idealmente <strong>dois a três top performers</strong> por processo. Um isolado vira refém de idiossincrasia; vários permitem triangular o que é prática boa de verdade <em>versus</em> jeitinho pessoal.</p>
+      </div>
+
+      <h2 id="f4-capturar">O que capturar (passos são o óbvio; o ouro está em outro lugar)</h2>
+      <p>Os passos do processo são a parte fácil — qualquer mapeamento BPM convencional pega isso. O que precisa ser capturado com profundidade é:</p>
+      <ul>
+        <li><strong>As decisões e os critérios</strong> por trás delas. Quando o operador olha para um documento e fala "esse aqui tá estranho", o que exatamente disparou esse julgamento? Esse é o conhecimento tácito que normalmente nunca chega ao manual — e é o que diferencia o bom do excelente.</li>
+        <li><strong>Os atalhos não documentados</strong>. Toda operação madura tem heurísticas que economizam tempo e que ninguém escreveu. <em>"Se vier do canal X, eu já abro o anexo Y primeiro porque 8 em 10 vezes o problema tá lá."</em> Isso vale ouro como skill.</li>
+        <li><strong>A variabilidade e os edge cases</strong>. O que muda quando o caso é do tipo A vs. tipo B? Quando o operador <em>escala</em> para outra pessoa em vez de resolver sozinho? Esses pontos de roteamento são candidatos óbvios para agentes orquestradores.</li>
+        <li><strong>A conversa interna</strong>. Por que parou? Por que voltou para esse documento? Por que desconfiou? Técnica do "think aloud" — pedir para o operador narrar o pensamento enquanto trabalha.</li>
+      </ul>
+
+      <h2 id="f4-como">Como capturar (a IA dentro do processo de captura)</h2>
+      <p>Combinação de três técnicas:</p>
+      <ol>
+        <li><strong>Observação direta</strong> — engenheiro embedado ou pesquisador sentado ao lado, vendo o trabalho real.</li>
+        <li><strong>Entrevistas estruturadas com think-aloud</strong> — gravadas, transcritas, com IA processando os transcripts para extrair padrões, decisões e exceções.</li>
+        <li><strong>Shadowing reverso</strong> — o observador tenta executar o trabalho com base no que entendeu, e o operador corrige. O que ele corrige é exatamente o que estava implícito.</li>
+      </ol>
+      <p>O agente entrevistador da Fase 1 também entra aqui — especialmente nas entrevistas estruturadas em escala. Mas o componente de <strong>observação ao vivo</strong>, presencial, é insubstituível nessa fase.</p>
+
+      <h2 id="f4-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefato desta fase</div>
+        <p>A saída desta fase <strong>não</strong> é um documento Word que vai parar num drive corporativo. É uma <strong>documentação já estruturada no formato que vira skill</strong> na fase seguinte.</p>
+        <p>Cada unidade atômica de trabalho descrita com:</p>
+        <ul>
+          <li>Inputs;</li>
+          <li>Outputs;</li>
+          <li>Critérios de decisão;</li>
+          <li>Exemplos positivos e negativos;</li>
+          <li>Exceções conhecidas.</li>
+        </ul>
+        <p>Pense num pré-formato de <code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">SKILL.md</code>. Isso encurta drasticamente a Fase 5 — a tradução vira quase mecânica.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-3"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">03 · Pareto e Priorização</div></a>
+        <a class="page-nav-link next" data-route="fase-5"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">05 · Primitivas agênticas</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 5 ============ -->
+    <section class="page" id="page-fase-5" data-toc='[
+      {"id":"f5-vocab","label":"O vocabulário das primitivas"},
+      {"id":"f5-decompor","label":"Como decompor"},
+      {"id":"f5-design","label":"Decisões de design"},
+      {"id":"f5-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 05 · Construção e validação</div>
+      <h1 class="display-title">Tradução para <em>primitivas agênticas</em></h1>
+      <p class="lead">Transformar conhecimento humano codificado em skills, agentes e orquestração — com pontos de <em>human-in-the-loop</em> e fallback explicitamente desenhados.</p>
+
+      <h2 id="f5-vocab">O vocabulário que organiza a tradução</h2>
+      <p>Antes de traduzir, é preciso o vocabulário comum. Cinco primitivas, em ordem do menor para o maior:</p>
+
+      <div style="display:grid;gap:10px;margin:20px 0;">
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 01</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Tool</div>
+          <div style="font-size:14px;color:var(--text-2);">Uma capacidade técnica isolada — chamar uma API, ler um PDF, consultar um banco, fazer OCR. É <em>infraestrutura</em>.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 02</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Skill</div>
+          <div style="font-size:14px;color:var(--text-2);">Uma unidade de competência codificada (no padrão SKILL.md). Uma habilidade humana traduzida em instruções executáveis, normalmente combinando uma ou mais tools.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 03</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Agent</div>
+          <div style="font-size:14px;color:var(--text-2);">Um especialista com responsabilidade clara, que possui um conjunto de skills e tools e toma decisões dentro do seu domínio. Ex.: <em>Especialista Documental</em>, <em>Especialista Cadastral</em>.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 04</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Orquestração</div>
+          <div style="font-size:14px;color:var(--text-2);">A lógica que coordena agentes: o que roda em paralelo, o que é sequencial, quando faz fan-out/fan-in, e onde para para consultar humano.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 05</div>
+          <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Command / Blueprint do processo</div>
+          <div style="font-size:14px;color:var(--text-2);">A expressão de alto nível de uma jornada completa, que invoca a orquestração. É o equivalente ao <em>playbook</em> do operador.</div>
+        </div>
+      </div>
+
+      <h2 id="f5-decompor">Como decompor</h2>
+      <p>Vai-se da documentação executável da Fase 4 com três cortes:</p>
+      <ul>
+        <li><strong>Corte por capacidade</strong> — cada unidade atômica de trabalho da Fase 4 vira candidata a skill. Nem toda unidade vira skill (algumas são triviais demais e viram instrução dentro de outra), mas o exercício força clareza.</li>
+        <li><strong>Corte por domínio</strong> — skills que pertencem a um mesmo domínio (documental, jurídico, cadastral) se agrupam sob um agente especializado.</li>
+        <li><strong>Corte por nível de risco/criticidade</strong> — onde a decisão tem alto impacto ou irreversibilidade, marca-se um ponto de <strong>human-in-the-loop</strong>. Não como concessão à IA imatura, mas como <em>design deliberado</em>.</li>
+      </ul>
+
+      <h2 id="f5-design">Decisões de design que precisam estar explícitas</h2>
+      <p>Cinco perguntas que precisam de resposta <strong>escrita</strong> nesta fase, porque vão ser cobradas na hora de construir:</p>
+      <ol>
+        <li><strong>Paralelo ou sequencial?</strong> Quais agentes podem rodar simultaneamente sem dependência mútua, e quais precisam esperar saída de outro? Latência e custo dependem disso.</li>
+        <li><strong>Que contexto cada skill/agent precisa?</strong> Manual do produto, política interna, exemplos históricos, base de exceções. Cada um entra como RAG, prompt fixo, ou parâmetro. Definir aqui evita retrabalho.</li>
+        <li><strong>Onde está o human-in-the-loop e qual o contrato?</strong> Não basta dizer "o humano valida". Qual é o input que ele recebe, em que formato, com que prazo, e como sua resposta retorna ao fluxo?</li>
+        <li><strong>Como cada skill é avaliada?</strong> Cada skill precisa do seu próprio critério de qualidade — porque é assim que se mede e se evolui depois. Conecta com a instrumentação por <em>default</em> da Fase 6.</li>
+        <li><strong>Modelo de fallback?</strong> O que acontece quando uma skill devolve baixa confiança ou erra? Escala? Reexecuta com outro modelo? Vai para HITL? Cada caminho precisa ser desenhado.</li>
+      </ol>
+
+      <div class="callout coral">
+        <div class="callout-title">↻ O ciclo Fase 5 ↔ Fase 6</div>
+        <p>O blueprint desta fase é a <strong>melhor hipótese antes da equipe entrar em campo</strong>. Na Fase 6, parte dele <em>vai</em> ser revisto — a operação real sempre revela arestas que a entrevista não pegou. Esse retorno da Fase 6 para a Fase 5 (e às vezes para a Fase 4) é o coração do ciclo iterativo.</p>
+      </div>
+
+      <h2 id="f5-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefato desta fase</div>
+        <p>Um <strong>blueprint agêntico executável</strong>:</p>
+        <ul>
+          <li>Catálogo de tools;</li>
+          <li>Catálogo de skills (cada uma com seu SKILL.md);</li>
+          <li>Catálogo de agentes (cada um com suas skills associadas);</li>
+          <li>Diagrama de orquestração;</li>
+          <li>Pontos de HITL marcados;</li>
+          <li>E — importante — a lista do que <strong>não</strong> está no escopo da primeira iteração, deixando claro o que fica para as voltas seguintes.</li>
+        </ul>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-4"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">04 · Codificação do humano</div></a>
+        <a class="page-nav-link next" data-route="fase-6"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">06 · Experimento em campo</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 6 ============ -->
+    <section class="page" id="page-fase-6" data-toc='[
+      {"id":"f6-modelo","label":"O modelo embedado"},
+      {"id":"f6-caracteristicas","label":"Três características"},
+      {"id":"f6-regra","label":"A regra prática"},
+      {"id":"f6-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 06 · Construção e validação</div>
+      <h1 class="display-title">Experimento em <em>campo</em></h1>
+      <p class="lead">Engenheiros embedados constroem rápido, com a operação real, e instrumentam tudo desde o dia 1. Aprender com o que o operador <em>faz</em> — não com o que ele diz que faz.</p>
+
+      <h2 id="f6-modelo">O modelo embedado</h2>
+      <p>A construção do experimento <strong>não acontece à distância</strong>, com requisitos consolidados e backlog refinado. O parceiro de transformação desloca um ou dois <strong>Engenheiros Embedados</strong> — perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final — para sentar do lado de quem executa o processo hoje, observar o fluxo verdadeiro (não o documentado), construir software funcionando em dias e iterar em ciclos curtos tendo o próprio operador como primeiro usuário.</p>
+
+      <h2 id="f6-caracteristicas">Três características que mudam a natureza desta fase</h2>
+      <ol>
+        <li><strong>Autonomia técnica e de produto</strong> — para decidir em tempo real, sem ciclos de aprovação que matariam a velocidade do experimento.</li>
+        <li><strong>Viés para software funcionando</strong> — em vez de slide ou documento de especificação. Cada semana entrega algo que roda, mesmo que parcial.</li>
+        <li><strong>Instrumentação por default</strong> — toda versão entregue já mede CAPEX, esforço economizado, qualidade e tempo de ciclo desde o primeiro dia. Não é fase posterior. Esse foi exatamente o gap clássico que custou narrativa em iniciativas anteriores: a medição ficou para depois do rollout.</li>
+      </ol>
+
+      <h2 id="f6-regra">A regra prática</h2>
+      <div class="callout coral">
+        <div class="callout-title">★ Princípio operacional</div>
+        <p><strong>Aprender com o que o operador faz — não com o que ele diz que faz.</strong></p>
+        <p>Boa parte do refinamento fino das skills (uma volta de volta à Fase 4) só emerge quando o engenheiro embedado <em>vê</em> o atalho que o melhor operador toma e que ninguém documentou — e codifica isso no momento em que vê.</p>
+      </div>
+      <p>É essa proximidade que justifica todo o investimento prévio em codificação (Fase 4) e tradução (Fase 5): existe um padrão para refinar, não um esboço para inventar do zero em campo.</p>
+
+      <h2 id="f6-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefatos desta fase</div>
+        <ul>
+          <li><strong>Experimento rodando</strong> em volume real ou semi-real;</li>
+          <li><strong>Métricas vivas</strong> desde o dia um — qualidade, custo, latência, esforço economizado;</li>
+          <li><strong>Skills, agentes e padrões refinados em campo</strong> que entram no repositório institucional e encurtam a próxima volta do ciclo.</li>
+        </ul>
+        <p>Esse último ponto talvez seja o mais importante: o aprendizado capturado aqui é <em>capital</em>, não custo afundado.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-5"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">05 · Primitivas agênticas</div></a>
+        <a class="page-nav-link next" data-route="fase-7"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">07 · Escala e operação</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 7 ============ -->
+    <section class="page" id="page-fase-7" data-toc='[
+      {"id":"f7-transicao","label":"A transição que se subestima"},
+      {"id":"f7-hardening","label":"Hardening técnico"},
+      {"id":"f7-change","label":"Change management"},
+      {"id":"f7-governanca","label":"Governança pós-rollout"},
+      {"id":"f7-rollout","label":"Estratégia de rollout"},
+      {"id":"f7-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 07 · Escala e composição</div>
+      <h1 class="display-title">Escala e <em>mudança de operação</em></h1>
+      <p class="lead">Entre o experimento que funcionou e a operação rodando em produção plena existe uma transição que costuma ser tratada como detalhe técnico — e é onde projetos de IA mais frequentemente derrapam.</p>
+
+      <h2 id="f7-transicao">A transição que costuma ser subestimada</h2>
+      <p>Três coisas mudam de uma só vez nesta fase:</p>
+      <ul>
+        <li>O volume sai de "semi-real" para <strong>100%</strong>;</li>
+        <li>A propriedade sai do engenheiro embedado para a <strong>operação</strong>;</li>
+        <li>O trabalho das pessoas envolvidas no processo <strong>muda — às vezes drasticamente</strong>.</li>
+      </ul>
+      <p>Tratar essas três como uma coisa só é receita para retrabalho. Cada uma é um <em>workstream</em>.</p>
+
+      <h2 id="f7-hardening">Hardening técnico (a parte óbvia)</h2>
+      <p>O experimento da Fase 6 foi otimizado para aprendizado, não para 24/7. Aqui ele precisa ganhar:</p>
+      <ul>
+        <li><strong>Observabilidade em produção</strong> — logs estruturados, dashboards de saúde, alertas.</li>
+        <li><strong>Resiliência</strong> — retry, circuit breakers, fallbacks documentados quando uma skill falha ou retorna baixa confiança.</li>
+        <li><strong>Performance e custo sob escala real</strong> — latência, throughput, e — relevante para IA — custo por execução, que pode estourar quando o volume explode.</li>
+        <li><strong>Segurança e auditoria</strong> — rastreabilidade de cada decisão tomada por cada agente, especialmente em processos regulados.</li>
+      </ul>
+      <p>A nuance específica de sistemas agênticos: <strong>avaliação de qualidade da saída continua rodando em produção</strong>, não só no laboratório — porque modelos derivam, dados de entrada mudam, e o que funcionava semana passada pode estar degradando hoje.</p>
+
+      <h2 id="f7-change">Change management como workstream explícito</h2>
+      <p>Quando um agente assume parte do trabalho que era de 200 pessoas, o <em>job description</em> dessas pessoas <strong>muda</strong>:</p>
+      <ul>
+        <li>Algumas migram para o papel de <strong>human-in-the-loop</strong> (revisar decisões de alta criticidade);</li>
+        <li>Outras para <strong>curadoria do próprio agente</strong> (validar exceções, alimentar exemplos novos);</li>
+        <li>Outras para trabalhos completamente diferentes.</li>
+      </ul>
+      <div class="callout">
+        <div class="callout-title">⚠ O risco silencioso</div>
+        <p>Se isso não for desenhado, ou vira <strong>ruído cultural</strong> ("a IA tá tomando nosso trabalho") ou vira <strong>gargalo operacional</strong> (o agente entrega rápido demais para o resto da operação acompanhar).</p>
+      </div>
+      <p>O parceiro de transformação não necessariamente executa esse workstream — mas precisa <strong>forçar a conversa</strong> com o cliente: quem do lado da organização é dono da redefinição de papéis? Qual o plano de comunicação? Que treinamento as pessoas precisam? Sem nomes, prazos e responsáveis, a Fase 7 fica capenga.</p>
+
+      <h2 id="f7-governanca">Governança e propriedade pós-rollout</h2>
+      <p>Outra pergunta que precisa de resposta <strong>antes</strong> do rollout, não depois: <strong>quem é dono do sistema em produção?</strong> O time embedado da Fase 6 não pode ficar sustentando indefinidamente — ele precisa rodar para a próxima iteração.</p>
+      <p>As três opções típicas:</p>
+      <ol>
+        <li><strong>Cliente assume com squad própria</strong>, com o parceiro em sustentação leve.</li>
+        <li><strong>Parceiro mantém squad de run dedicada</strong>, no modelo comercial de fixed-price na transformação + squad de run com compromisso de métricas DORA/SPACE.</li>
+        <li><strong>Modelo híbrido</strong>.</li>
+      </ol>
+      <p>A escolha é <em>estratégica e comercial</em> — não técnica — e precisa estar decidida antes do rollout.</p>
+
+      <h2 id="f7-rollout">Estratégia de rollout</h2>
+      <p>Para processos de volume e criticidade altos, raramente faz sentido <em>big bang</em>. O padrão saudável é <strong>canary controlado</strong>:</p>
+      <ul>
+        <li>Começa atendendo uma fatia do volume real (10–20%) em paralelo com o processo atual;</li>
+        <li>Compara resultados em janela curta;</li>
+        <li>Expande progressivamente se as métricas seguem firmes.</li>
+      </ul>
+      <p>Esse modelo dá ao change management <strong>tempo de respirar</strong> e permite reverter rapidamente se algo degrada.</p>
+
+      <h2 id="f7-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Artefatos desta fase</div>
+        <ul>
+          <li><strong>Solução rodando em produção plena</strong>, com impacto real medido (não estimado);</li>
+          <li><strong>Nova operação estabilizada</strong>, com papéis humanos redefinidos;</li>
+          <li><strong>Conjunto de aprendizados de campo</strong> já incorporado ao repositório de skills e padrões — o que precisou ser endurecido, que tipos de exceção apareceram em produção que o laboratório não pegou, que ajustes de orquestração funcionaram.</li>
+        </ul>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-6"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">06 · Experimento em campo</div></a>
+        <a class="page-nav-link next" data-route="fase-8"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">08 · Evolução contínua</div></a>
+      </div>
+    </section>
+
+    <!-- ============ FASE 8 ============ -->
+    <section class="page" id="page-fase-8" data-toc='[
+      {"id":"f8-natureza","label":"A fase que diferencia"},
+      {"id":"f8-modelos","label":"Reavaliação de modelos"},
+      {"id":"f8-repo","label":"Repositório de skills"},
+      {"id":"f8-cross","label":"Alavanca cross-process"},
+      {"id":"f8-loop","label":"O loop de volta"},
+      {"id":"f8-saida","label":"Saída"}
+    ]'>
+      <div class="eyebrow">Fase 08 · Escala e composição</div>
+      <h1 class="display-title">Evolução <em>contínua</em></h1>
+      <p class="lead">Não é um momento — é um regime de operação permanente que roda em paralelo com tudo, e que dispara a próxima volta do ciclo quando faz sentido. É o que torna o framework uma <em>capacidade instalada</em>, não um projeto isolado.</p>
+
+      <h2 id="f8-natureza">A fase que diferencia este modelo de um projeto comum</h2>
+      <p>Um projeto comum acaba quando vai para produção. Aqui a Fase 8 é o que justifica o investimento em método — porque é onde os ciclos seguintes ficam progressivamente <strong>mais baratos e mais rápidos</strong>.</p>
+      <p>Sem ela, cada novo processo é um <em>zero-to-one</em>. Com ela, cada novo processo herda uma plataforma, um repositório de skills, padrões de orquestração e um time que aprendeu junto. É a diferença entre vender N projetos isolados e <strong>construir uma capacidade AI-native</strong> da organização.</p>
+
+      <h2 id="f8-modelos">O mecanismo de reavaliação de modelos</h2>
+      <p>A capacidade central: pegar um conjunto representativo de execuções históricas, rodá-las contra modelos alternativos, e comparar precisão, custo e latência. Os modelos líderes mudam a cada poucos meses — e o ganho composto é grande:</p>
+      <ul>
+        <li>O <strong>custo de operação</strong> dos agentes tende a cair com o tempo (modelos mais baratos);</li>
+        <li>A <strong>qualidade</strong> tende a subir (modelos melhores);</li>
+        <li>Sem refazer arquitetura.</li>
+      </ul>
+      <p>Esse mecanismo precisa virar <strong>infraestrutura padrão</strong> do método, não construção custom por projeto. Cada agente, ao ir para produção, sai com um conjunto de execuções de referência arquivadas; novos modelos são testados contra esse conjunto automaticamente; a substituição quando vale a pena vira <em>decisão de governança</em>, não de redesenho.</p>
+
+      <h2 id="f8-repo">O repositório de skills como ativo institucional vivo</h2>
+      <p>Codificar a melhor prática humana em skills muda a <strong>economia do conhecimento</strong> dentro da organização:</p>
+      <div class="principle" style="margin:20px 0;">
+        <div class="principle-mark">"</div>
+        <div class="principle-text">Quando uma pessoa nova entra na organização, ela não precisa sentar e fazer um curso e aprender e começar a ser avaliada — ela simplesmente <em>usa</em>, e usando ela já está aplicando a melhor prática.</div>
+      </div>
+      <p>O repositório precisa de <strong>governança leve mas explícita</strong>:</p>
+      <ul>
+        <li>Cada skill tem <strong>dono nomeado</strong>, versão, changelog, casos de uso, e métricas de performance.</li>
+        <li>Quando uma skill é refinada com aprendizado de produção (vindo da Fase 7), a evolução é <strong>versionada, não sobrescrita silenciosamente</strong>.</li>
+        <li>Quando uma skill começa a apresentar drift, é <strong>flagada para revisão</strong>.</li>
+        <li>Quando duas skills convergem (porque processo A e processo B descobriram que tratam o mesmo problema), elas são <strong>fundidas</strong>.</li>
+      </ul>
+      <div class="callout coral">
+        <div class="callout-title">💎 O ativo defensável</div>
+        <p>Esse repositório é o que torna o parceiro de transformação <strong>defensável</strong> nesse mercado — não é qualquer agente específico, é o <em>acervo crescente</em> de skills, padrões de orquestração e blueprints validados em produção.</p>
+      </div>
+
+      <h2 id="f8-cross">A alavanca cross-process</h2>
+      <p>A partir do segundo ou terceiro ciclo, começa a aparecer a alavanca mais valiosa: <strong>skills construídas para um processo se reutilizam em outros</strong>.</p>
+      <p>O agente que faz checagem documental num processo tem partes que servem para abertura de cadastro, para operações análogas, para onboarding de fornecedor. A orquestração que coordena especialistas em paralelo serve para qualquer fluxo análogo.</p>
+      <p>Quando isso começa a acontecer, o tempo de execução do ciclo <strong>despenca</strong>. A Fase 4 (codificação do humano) e a Fase 5 (tradução para primitivas) reduzem porque parte do trabalho já está feita — sobra refinar o que é específico do novo domínio. É exatamente o contrário de cada projeto sendo um <em>zero-to-one</em>.</p>
+
+      <h2 id="f8-loop">O loop de volta para a Fase 1</h2>
+      <p>A Fase 8 dispara a próxima iteração quando:</p>
+      <ul>
+        <li><strong>(a)</strong> o primeiro experimento estabilizou em produção e há banda para começar o próximo, ou</li>
+        <li><strong>(b)</strong> surgiu uma oportunidade de alto valor que justifica iniciar um paralelo.</li>
+      </ul>
+      <p>O assessment da Fase 1 da próxima iteração é mais rápido e mais focado, porque o agente entrevistador já conhece o vocabulário da organização, e porque o repositório de skills permite identificar muito cedo onde há reuso óbvio.</p>
+
+      <h2 id="f8-saida">Saída</h2>
+      <div class="output-box">
+        <div class="output-label">Não é um artefato — é um estado</div>
+        <p>A Fase 8 não entrega um documento. Ela é um <strong>regime permanente</strong>:</p>
+        <ul>
+          <li><strong>Repositório de skills vivo</strong>;</li>
+          <li><strong>Mecanismo de reavaliação de modelos</strong> rodando em background;</li>
+          <li><strong>Métricas operacionais e de qualidade</strong> monitoradas em todos os agentes em produção;</li>
+          <li>E — talvez o mais importante — uma <strong>capacidade instalada conjunta</strong> entre parceiro e cliente, que torna o próximo processo um exercício de <em>aplicar método</em>, não de inventá-lo.</li>
+        </ul>
+        <p>Esse é o ativo que se compõe ao longo do tempo — e que muda a equação econômica de toda a transformação.</p>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="fase-7"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">07 · Escala e operação</div></a>
+        <a class="page-nav-link next" data-route="home"><div class="page-nav-label">Voltar para →</div><div class="page-nav-title">Visão geral</div></a>
+      </div>
+    </section>
+
+    <!-- ============ DIFERENCIAIS ============ -->
+    <section class="page" id="page-diferenciais" data-toc='[
+      {"id":"d-ia","label":"IA no processo"},
+      {"id":"d-skills","label":"Conhecimento codificado"},
+      {"id":"d-entrega","label":"Entrega incremental"},
+      {"id":"d-comp","label":"Aprendizado que se compõe"},
+      {"id":"d-gov","label":"Governança e confiança"}
+    ]'>
+      <div class="eyebrow">Apêndice A</div>
+      <h1 class="display-title">O que torna este processo <em>diferente</em></h1>
+      <p class="lead">Cinco coisas que este framework entrega e que a otimização clássica de processos não entrega.</p>
+
+      <h2 id="d-ia">1. IA está no processo, não só no produto</h2>
+      <p>O assessment é feito por agente, a documentação do AS-IS é acelerada por IA, a codificação de skills usa IA para extrair padrões — isso é parte do <em>future-back</em> aplicado a <strong>como a gente trabalha</strong>, não só ao que a gente entrega.</p>
+      <p>Quando o método se reinventa também, o tempo de cada ciclo cai progressivamente — porque cada ciclo melhora a infraestrutura do próximo.</p>
+
+      <h2 id="d-skills">2. O conhecimento fica codificado em skills, não em pessoas</h2>
+      <p>Quando alguém novo entra no time, não precisa fazer curso e ser avaliado por meses — usa as skills e, ao usar, já está aplicando a melhor prática. Casos validados em produção provaram esse princípio funcionando em escala.</p>
+      <p>O conhecimento tácito do top performer deixa de ser refém da pessoa e vira <strong>ativo institucional auditável</strong>.</p>
+
+      <h2 id="d-entrega">3. A entrega é incremental, mas disruptiva</h2>
+      <p>Cada ciclo entrega um <strong>pedaço protótipo do futuro rodando no presente</strong> — exatamente o que patrocinadores de transformação querem ver, mais do que um número de eficiência num slide.</p>
+      <p>A demonstração concreta é o vetor de adoção mais forte que existe. Métricas em PowerPoint não convencem; um agente operando ao lado da equipe convence.</p>
+
+      <h2 id="d-comp">4. Aprendizado que se compõe</h2>
+      <p>Skills, agentes e padrões de orquestração viram <strong>acervo institucional</strong>. Cada ciclo barateia o próximo — vira capacidade instalada, não projeto isolado.</p>
+      <p>É a diferença entre vender N projetos e construir capacidade AI-native.</p>
+
+      <h2 id="d-gov">5. Governança e confiança por design</h2>
+      <p>Métricas, qualidade, auditoria e <em>human-in-the-loop</em> são partes do desenho — não anexos. A reavaliação contínua de modelos faz com que a operação fique <strong>mais barata e melhor com o tempo</strong>, sem precisar refazer arquitetura.</p>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="home"><div class="page-nav-label">← Voltar para</div><div class="page-nav-title">Visão geral</div></a>
+        <a class="page-nav-link next" data-route="squad"><div class="page-nav-label">Apêndice B →</div><div class="page-nav-title">Squad sugerida</div></a>
+      </div>
+    </section>
+
+    <!-- ============ SQUAD ============ -->
+    <section class="page" id="page-squad" data-toc='[
+      {"id":"s-principio","label":"Princípio de dimensionamento"},
+      {"id":"s-parceiro","label":"Lado do parceiro"},
+      {"id":"s-cliente","label":"Lado da organização"}
+    ]'>
+      <div class="eyebrow">Apêndice B</div>
+      <h1 class="display-title">Squad <em>sugerida</em></h1>
+      <p class="lead">Time enxuto, misto entre parceiro de transformação e organização cliente. Seis pessoas é uma boa referência — não trinta.</p>
+
+      <h2 id="s-principio">Princípio de dimensionamento</h2>
+      <p>A tentação clássica em projetos grandes é montar um time inflado, com PMO, vários gerentes, várias frentes de desenvolvimento. Aqui o princípio é o oposto: <strong>squad enxuta, autonomia alta, ciclo curto</strong>. O método absorve o que normalmente seria responsabilidade de muitas pessoas — porque a própria IA acelera várias atividades.</p>
+
+      <h2 id="s-parceiro">Lado do parceiro de transformação</h2>
+      <div style="display:grid;gap:14px;margin:20px 0;">
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Orquestrador <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
+          <div style="font-size:14px;color:var(--text-2);">Lidera o método, conduz a Fase 2, garante coerência entre fases. É a referência metodológica do projeto.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Engenheiros Embedados <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 a 2 pessoas</span></div>
+          <div style="font-size:14px;color:var(--text-2);">Perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final. São quem executa as Fases 4 a 6 em campo.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">AIX <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
+          <div style="font-size:14px;color:var(--text-2);">Desenho de interação humano-agente, especialmente nos pontos de HITL. Garante que a experiência da operação com a IA seja desenhada, não improvisada.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-title">ℹ Por que não há um "AI Product Specialist" separado</div>
+        <p>O papel de especialista de produto em IA <strong>se dissolve dentro do perfil do Engenheiro Embedado</strong>. Esse perfil já é, por natureza, a banda mental dedicada para pensar agenticamente que costuma faltar no cliente.</p>
+      </div>
+
+      <h2 id="s-cliente">Lado da organização cliente</h2>
+      <div style="display:grid;gap:14px;margin:20px 0;">
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">PM / dono(s) do processo</div>
+          <div style="font-size:14px;color:var(--text-2);">Fonte de verdade sobre objetivos e prioridades. Decide os trade-offs que não podem ser decididos pela squad sozinha.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+          <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Acesso garantido aos operadores reais</div>
+          <div style="font-size:14px;color:var(--text-2);">Não é um papel — é uma <strong>condição contratual</strong>. Sem isso, o modelo embedado da Fase 6 simplesmente não funciona.</div>
+        </div>
+      </div>
+
+      <div class="page-nav">
+        <a class="page-nav-link" data-route="diferenciais"><div class="page-nav-label">← Apêndice A</div><div class="page-nav-title">O que torna diferente</div></a>
+        <a class="page-nav-link next" data-route="home"><div class="page-nav-label">Voltar para →</div><div class="page-nav-title">Visão geral</div></a>
+      </div>
+    </section>
+
+    </div>
+  </main>
+
+  <aside class="toc" id="toc">
+    <div class="toc-label">Nesta página</div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="footer">
+    <span class="footer-strong">Reinvenção Agêntica de Processos</span> — Um framework para repensar processos operacionais a partir de mentalidade <em>future-back</em>.
+  </div>
+</div>
+
+<script>
+  // === ROUTING ===
+  const routes = ['home','fase-1','fase-2','fase-3','fase-4','fase-5','fase-6','fase-7','fase-8','diferenciais','squad'];
+
+  function navigate(route) {
+    if (!routes.includes(route)) route = 'home';
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + route).classList.add('active');
+    document.querySelectorAll('.sidebar-link').forEach(l => {
+      l.classList.toggle('active', l.dataset.route === route);
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    history.replaceState(null, '', '#' + route);
+    buildToc(route);
+    // Close sidebar on mobile after click
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-route]');
+    if (el) {
+      e.preventDefault();
+      navigate(el.dataset.route);
+    }
+    // TOC link
+    const tocLink = e.target.closest('.toc-list a');
+    if (tocLink) {
+      e.preventDefault();
+      const id = tocLink.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  });
+
+  // === TOC ===
+  function buildToc(route) {
+    const tocList = document.getElementById('tocList');
+    const page = document.getElementById('page-' + route);
+    const tocData = page.dataset.toc;
+    if (!tocData) { tocList.innerHTML = ''; return; }
+    try {
+      const items = JSON.parse(tocData);
+      tocList.innerHTML = items.map(i => `<a href="#${i.id}">${i.label}</a>`).join('');
+    } catch (e) { tocList.innerHTML = ''; }
+  }
+
+  // === SCROLLSPY for TOC ===
+  let scrollSpyTimer;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollSpyTimer);
+    scrollSpyTimer = setTimeout(() => {
+      const activeSection = document.querySelector('.page.active');
+      if (!activeSection) return;
+      const headings = activeSection.querySelectorAll('h2[id], h3[id]');
+      let current = null;
+      headings.forEach(h => {
+        const rect = h.getBoundingClientRect();
+        if (rect.top < 120) current = h.id;
+      });
+      document.querySelectorAll('.toc-list a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }, 50);
+  });
+
+  // === MENU TOGGLE (mobile) ===
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+
+  // === INFOGRAPHIC LOADER ===
+  async function loadInfographic() {
+    const tryNames = [
+      'image.png', 'image.jpg', 'image.jpeg', 'image.webp',
+      'infographic.png', 'infographic.jpg',
+      'pasted-image.png', 'pasted-image.jpg',
+      'processo.png', 'processo.jpg',
+      'diagrama.png', 'diagrama.jpg'
+    ];
+    if (!window.fs || !window.fs.readFile) return;
+    for (const name of tryNames) {
+      try {
+        const data = await window.fs.readFile(name);
+        const ext = name.split('.').pop().toLowerCase();
+        const mime = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg'
+                    : ext === 'webp' ? 'image/webp'
+                    : 'image/png';
+        const blob = new Blob([data], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const img = document.getElementById('infographic-img');
+        img.src = url;
+        img.style.display = 'block';
+        document.getElementById('infographic-fallback').style.display = 'none';
+        return;
+      } catch (e) { /* keep trying */ }
+    }
+  }
+
+  // === INIT ===
+  const initial = window.location.hash ? window.location.hash.slice(1) : 'home';
+  navigate(initial);
+  loadInfographic();
+</script>
