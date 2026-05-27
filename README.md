@@ -1,4 +1,4 @@
-# Reinvenção Agêntica de Processos
+# Agentic Process Reinvention
 
 Framework de documentação estático — HTML puro, sem build step.
 
