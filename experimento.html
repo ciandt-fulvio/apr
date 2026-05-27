@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experimento em Campo — Reinvenção Agêntica de Processos</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-mark">R</div>
+    <div class="topbar-title">Reinvenção Agêntica de Processos</div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-meta">Framework v1.0</div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Visão geral</div>
+      <a class="sidebar-link" href="index.html"><span class="sidebar-num">→</span> Home</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Descoberta e definição</div>
+      <a class="sidebar-link" href="assessment.html"><span class="sidebar-num">01</span> Assessment Agêntico</a>
+      <a class="sidebar-link" href="future-back.html"><span class="sidebar-num">02</span> Visão Future-Back</a>
+      <a class="sidebar-link" href="priorizacao.html"><span class="sidebar-num">03</span> Pareto e Priorização</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Construção e validação</div>
+      <a class="sidebar-link" href="codificacao.html"><span class="sidebar-num">04</span> Codificação do humano</a>
+      <a class="sidebar-link" href="primitivas.html"><span class="sidebar-num">05</span> Primitivas agênticas</a>
+      <a class="sidebar-link" href="experimento.html"><span class="sidebar-num">06</span> Experimento em campo</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Escala e composição</div>
+      <a class="sidebar-link" href="escala.html"><span class="sidebar-num">07</span> Escala e operação</a>
+      <a class="sidebar-link" href="evolucao.html"><span class="sidebar-num">08</span> Evolução contínua</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Apêndices</div>
+      <a class="sidebar-link" href="diferenciais.html"><span class="sidebar-num">A</span> Diferenciais</a>
+      <a class="sidebar-link" href="squad.html"><span class="sidebar-num">B</span> Squad sugerida</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content-wrap">
+      <section class="page" data-toc='[
+        {"id":"f6-modelo","label":"O modelo embedado"},
+        {"id":"f6-caracteristicas","label":"Três características"},
+        {"id":"f6-regra","label":"A regra prática"},
+        {"id":"f6-saida","label":"Saída"}
+      ]'>
+        <div class="eyebrow">Fase 06 · Construção e validação</div>
+        <h1 class="display-title">Experimento em <em>campo</em></h1>
+        <p class="lead">Engenheiros embedados constroem rápido, com a operação real, e instrumentam tudo desde o dia 1. Aprender com o que o operador <em>faz</em> — não com o que ele diz que faz.</p>
+
+        <h2 id="f6-modelo">O modelo embedado</h2>
+        <p>A construção do experimento <strong>não acontece à distância</strong>, com requisitos consolidados e backlog refinado. O parceiro de transformação desloca um ou dois <strong>Engenheiros Embedados</strong> — perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final — para sentar do lado de quem executa o processo hoje, observar o fluxo verdadeiro (não o documentado), construir software funcionando em dias e iterar em ciclos curtos tendo o próprio operador como primeiro usuário.</p>
+
+        <h2 id="f6-caracteristicas">Três características que mudam a natureza desta fase</h2>
+        <ol>
+          <li><strong>Autonomia técnica e de produto</strong> — para decidir em tempo real, sem ciclos de aprovação que matariam a velocidade do experimento.</li>
+          <li><strong>Viés para software funcionando</strong> — em vez de slide ou documento de especificação. Cada semana entrega algo que roda, mesmo que parcial.</li>
+          <li><strong>Instrumentação por default</strong> — toda versão entregue já mede CAPEX, esforço economizado, qualidade e tempo de ciclo desde o primeiro dia. Não é fase posterior. Esse foi exatamente o gap clássico que custou narrativa em iniciativas anteriores: a medição ficou para depois do rollout.</li>
+        </ol>
+
+        <h2 id="f6-regra">A regra prática</h2>
+        <div class="callout coral">
+          <div class="callout-title">★ Princípio operacional</div>
+          <p><strong>Aprender com o que o operador faz — não com o que ele diz que faz.</strong></p>
+          <p>Boa parte do refinamento fino das skills (uma volta de volta à Fase 4) só emerge quando o engenheiro embedado <em>vê</em> o atalho que o melhor operador toma e que ninguém documentou — e codifica isso no momento em que vê.</p>
+        </div>
+        <p>É essa proximidade que justifica todo o investimento prévio em codificação (Fase 4) e tradução (Fase 5): existe um padrão para refinar, não um esboço para inventar do zero em campo.</p>
+
+        <h2 id="f6-saida">Saída</h2>
+        <div class="output-box">
+          <div class="output-label">Artefatos desta fase</div>
+          <ul>
+            <li><strong>Experimento rodando</strong> em volume real ou semi-real;</li>
+            <li><strong>Métricas vivas</strong> desde o dia um — qualidade, custo, latência, esforço economizado;</li>
+            <li><strong>Skills, agentes e padrões refinados em campo</strong> que entram no repositório institucional e encurtam a próxima volta do ciclo.</li>
+          </ul>
+          <p>Esse último ponto talvez seja o mais importante: o aprendizado capturado aqui é <em>capital</em>, não custo afundado.</p>
+        </div>
+
+        <div class="page-nav">
+          <a class="page-nav-link" href="primitivas.html"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">Primitivas agênticas</div></a>
+          <a class="page-nav-link next" href="escala.html"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">Escala e operação</div></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="toc" id="toc">
+    <div class="toc-label">Nesta página</div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="footer">
+    <span class="footer-strong">Reinvenção Agêntica de Processos</span> — Um framework para repensar processos operacionais a partir de mentalidade <em>future-back</em>.
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

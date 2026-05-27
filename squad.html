@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squad Sugerida — Reinvenção Agêntica de Processos</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-mark">R</div>
+    <div class="topbar-title">Reinvenção Agêntica de Processos</div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-meta">Framework v1.0</div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Visão geral</div>
+      <a class="sidebar-link" href="index.html"><span class="sidebar-num">→</span> Home</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Descoberta e definição</div>
+      <a class="sidebar-link" href="assessment.html"><span class="sidebar-num">01</span> Assessment Agêntico</a>
+      <a class="sidebar-link" href="future-back.html"><span class="sidebar-num">02</span> Visão Future-Back</a>
+      <a class="sidebar-link" href="priorizacao.html"><span class="sidebar-num">03</span> Pareto e Priorização</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Construção e validação</div>
+      <a class="sidebar-link" href="codificacao.html"><span class="sidebar-num">04</span> Codificação do humano</a>
+      <a class="sidebar-link" href="primitivas.html"><span class="sidebar-num">05</span> Primitivas agênticas</a>
+      <a class="sidebar-link" href="experimento.html"><span class="sidebar-num">06</span> Experimento em campo</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Escala e composição</div>
+      <a class="sidebar-link" href="escala.html"><span class="sidebar-num">07</span> Escala e operação</a>
+      <a class="sidebar-link" href="evolucao.html"><span class="sidebar-num">08</span> Evolução contínua</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Apêndices</div>
+      <a class="sidebar-link" href="diferenciais.html"><span class="sidebar-num">A</span> Diferenciais</a>
+      <a class="sidebar-link" href="squad.html"><span class="sidebar-num">B</span> Squad sugerida</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content-wrap">
+      <section class="page" data-toc='[
+        {"id":"s-principio","label":"Princípio de dimensionamento"},
+        {"id":"s-parceiro","label":"Lado do parceiro"},
+        {"id":"s-cliente","label":"Lado da organização"}
+      ]'>
+        <div class="eyebrow">Apêndice B</div>
+        <h1 class="display-title">Squad <em>sugerida</em></h1>
+        <p class="lead">Time enxuto, misto entre parceiro de transformação e organização cliente. Seis pessoas é uma boa referência — não trinta.</p>
+
+        <h2 id="s-principio">Princípio de dimensionamento</h2>
+        <p>A tentação clássica em projetos grandes é montar um time inflado, com PMO, vários gerentes, várias frentes de desenvolvimento. Aqui o princípio é o oposto: <strong>squad enxuta, autonomia alta, ciclo curto</strong>. O método absorve o que normalmente seria responsabilidade de muitas pessoas — porque a própria IA acelera várias atividades.</p>
+
+        <h2 id="s-parceiro">Lado do parceiro de transformação</h2>
+        <div style="display:grid;gap:14px;margin:20px 0;">
+          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Orquestrador <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
+            <div style="font-size:14px;color:var(--text-2);">Lidera o método, conduz a Fase 2, garante coerência entre fases. É a referência metodológica do projeto.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Engenheiros Embedados <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 a 2 pessoas</span></div>
+            <div style="font-size:14px;color:var(--text-2);">Perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final. São quem executa as Fases 4 a 6 em campo.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">AIX <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
+            <div style="font-size:14px;color:var(--text-2);">Desenho de interação humano-agente, especialmente nos pontos de HITL. Garante que a experiência da operação com a IA seja desenhada, não improvisada.</div>
+          </div>
+        </div>
+        <div class="callout">
+          <div class="callout-title">ℹ Por que não há um "AI Product Specialist" separado</div>
+          <p>O papel de especialista de produto em IA <strong>se dissolve dentro do perfil do Engenheiro Embedado</strong>. Esse perfil já é, por natureza, a banda mental dedicada para pensar agenticamente que costuma faltar no cliente.</p>
+        </div>
+
+        <h2 id="s-cliente">Lado da organização cliente</h2>
+        <div style="display:grid;gap:14px;margin:20px 0;">
+          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">PM / dono(s) do processo</div>
+            <div style="font-size:14px;color:var(--text-2);">Fonte de verdade sobre objetivos e prioridades. Decide os trade-offs que não podem ser decididos pela squad sozinha.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
+            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Acesso garantido aos operadores reais</div>
+            <div style="font-size:14px;color:var(--text-2);">Não é um papel — é uma <strong>condição contratual</strong>. Sem isso, o modelo embedado da Fase 6 simplesmente não funciona.</div>
+          </div>
+        </div>
+
+        <div class="page-nav">
+          <a class="page-nav-link" href="diferenciais.html"><div class="page-nav-label">← Apêndice A</div><div class="page-nav-title">O que torna diferente</div></a>
+          <a class="page-nav-link next" href="index.html"><div class="page-nav-label">Voltar para →</div><div class="page-nav-title">Visão geral</div></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="toc" id="toc">
+    <div class="toc-label">Nesta página</div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="footer">
+    <span class="footer-strong">Reinvenção Agêntica de Processos</span> — Um framework para repensar processos operacionais a partir de mentalidade <em>future-back</em>.
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codificação do humano — Reinvenção Agêntica de Processos</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-mark">R</div>
+    <div class="topbar-title">Reinvenção Agêntica de Processos</div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-meta">Framework v1.0</div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Visão geral</div>
+      <a class="sidebar-link" href="index.html"><span class="sidebar-num">→</span> Home</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Descoberta e definição</div>
+      <a class="sidebar-link" href="assessment.html"><span class="sidebar-num">01</span> Assessment Agêntico</a>
+      <a class="sidebar-link" href="future-back.html"><span class="sidebar-num">02</span> Visão Future-Back</a>
+      <a class="sidebar-link" href="priorizacao.html"><span class="sidebar-num">03</span> Pareto e Priorização</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Construção e validação</div>
+      <a class="sidebar-link" href="codificacao.html"><span class="sidebar-num">04</span> Codificação do humano</a>
+      <a class="sidebar-link" href="primitivas.html"><span class="sidebar-num">05</span> Primitivas agênticas</a>
+      <a class="sidebar-link" href="experimento.html"><span class="sidebar-num">06</span> Experimento em campo</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Escala e composição</div>
+      <a class="sidebar-link" href="escala.html"><span class="sidebar-num">07</span> Escala e operação</a>
+      <a class="sidebar-link" href="evolucao.html"><span class="sidebar-num">08</span> Evolução contínua</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Apêndices</div>
+      <a class="sidebar-link" href="diferenciais.html"><span class="sidebar-num">A</span> Diferenciais</a>
+      <a class="sidebar-link" href="squad.html"><span class="sidebar-num">B</span> Squad sugerida</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content-wrap">
+      <section class="page" data-toc='[
+        {"id":"f4-quem","label":"Quem observar"},
+        {"id":"f4-capturar","label":"O que capturar"},
+        {"id":"f4-como","label":"Como capturar"},
+        {"id":"f4-saida","label":"Saída"}
+      ]'>
+        <div class="eyebrow">Fase 04 · Construção e validação</div>
+        <h1 class="display-title">Codificação do <em>como o humano faz</em></h1>
+        <p class="lead">Observar os melhores operadores e capturar o que ninguém escreveu — decisões, critérios, atalhos e exceções que diferenciam o bom do excelente.</p>
+
+        <h2 id="f4-quem">Quem observar (e por que isso importa)</h2>
+        <p>A escolha das pessoas observadas determina a qualidade de tudo o que vem depois. Não é o operador médio — é o <strong>top performer</strong>: aquele(a) que tem menos retrabalho, decide mais rápido nos casos complexos, e tem a reputação interna de "é com fulano que eu confio quando o caso é difícil".</p>
+        <p>A razão é simples: a IA vai herdar o que for codificado. Se você codifica prática mediana, você escala prática mediana. E é exatamente onde muitos projetos de IA dão errado — automatizam o que está no manual, não o que o melhor humano <em>efetivamente faz</em>.</p>
+        <div class="callout">
+          <div class="callout-title">👥 Quantos observar</div>
+          <p>Idealmente <strong>dois a três top performers</strong> por processo. Um isolado vira refém de idiossincrasia; vários permitem triangular o que é prática boa de verdade <em>versus</em> jeitinho pessoal.</p>
+        </div>
+
+        <h2 id="f4-capturar">O que capturar (passos são o óbvio; o ouro está em outro lugar)</h2>
+        <p>Os passos do processo são a parte fácil — qualquer mapeamento BPM convencional pega isso. O que precisa ser capturado com profundidade é:</p>
+        <ul>
+          <li><strong>As decisões e os critérios</strong> por trás delas. Quando o operador olha para um documento e fala "esse aqui tá estranho", o que exatamente disparou esse julgamento? Esse é o conhecimento tácito que normalmente nunca chega ao manual — e é o que diferencia o bom do excelente.</li>
+          <li><strong>Os atalhos não documentados</strong>. Toda operação madura tem heurísticas que economizam tempo e que ninguém escreveu. <em>"Se vier do canal X, eu já abro o anexo Y primeiro porque 8 em 10 vezes o problema tá lá."</em> Isso vale ouro como skill.</li>
+          <li><strong>A variabilidade e os edge cases</strong>. O que muda quando o caso é do tipo A vs. tipo B? Quando o operador <em>escala</em> para outra pessoa em vez de resolver sozinho? Esses pontos de roteamento são candidatos óbvios para agentes orquestradores.</li>
+          <li><strong>A conversa interna</strong>. Por que parou? Por que voltou para esse documento? Por que desconfiou? Técnica do "think aloud" — pedir para o operador narrar o pensamento enquanto trabalha.</li>
+        </ul>
+
+        <h2 id="f4-como">Como capturar (a IA dentro do processo de captura)</h2>
+        <p>Combinação de três técnicas:</p>
+        <ol>
+          <li><strong>Observação direta</strong> — engenheiro embedado ou pesquisador sentado ao lado, vendo o trabalho real.</li>
+          <li><strong>Entrevistas estruturadas com think-aloud</strong> — gravadas, transcritas, com IA processando os transcripts para extrair padrões, decisões e exceções.</li>
+          <li><strong>Shadowing reverso</strong> — o observador tenta executar o trabalho com base no que entendeu, e o operador corrige. O que ele corrige é exatamente o que estava implícito.</li>
+        </ol>
+        <p>O agente entrevistador da Fase 1 também entra aqui — especialmente nas entrevistas estruturadas em escala. Mas o componente de <strong>observação ao vivo</strong>, presencial, é insubstituível nessa fase.</p>
+
+        <h2 id="f4-saida">Saída</h2>
+        <div class="output-box">
+          <div class="output-label">Artefato desta fase</div>
+          <p>A saída desta fase <strong>não</strong> é um documento Word que vai parar num drive corporativo. É uma <strong>documentação já estruturada no formato que vira skill</strong> na fase seguinte.</p>
+          <p>Cada unidade atômica de trabalho descrita com:</p>
+          <ul>
+            <li>Inputs;</li>
+            <li>Outputs;</li>
+            <li>Critérios de decisão;</li>
+            <li>Exemplos positivos e negativos;</li>
+            <li>Exceções conhecidas.</li>
+          </ul>
+          <p>Pense num pré-formato de <code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">SKILL.md</code>. Isso encurta drasticamente a Fase 5 — a tradução vira quase mecânica.</p>
+        </div>
+
+        <div class="page-nav">
+          <a class="page-nav-link" href="priorizacao.html"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">Pareto e Priorização</div></a>
+          <a class="page-nav-link next" href="primitivas.html"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">Primitivas agênticas</div></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="toc" id="toc">
+    <div class="toc-label">Nesta página</div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="footer">
+    <span class="footer-strong">Reinvenção Agêntica de Processos</span> — Um framework para repensar processos operacionais a partir de mentalidade <em>future-back</em>.
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

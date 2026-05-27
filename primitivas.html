@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primitivas Agênticas — Reinvenção Agêntica de Processos</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-mark">R</div>
+    <div class="topbar-title">Reinvenção Agêntica de Processos</div>
+  </a>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-meta">Framework v1.0</div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Visão geral</div>
+      <a class="sidebar-link" href="index.html"><span class="sidebar-num">→</span> Home</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Descoberta e definição</div>
+      <a class="sidebar-link" href="assessment.html"><span class="sidebar-num">01</span> Assessment Agêntico</a>
+      <a class="sidebar-link" href="future-back.html"><span class="sidebar-num">02</span> Visão Future-Back</a>
+      <a class="sidebar-link" href="priorizacao.html"><span class="sidebar-num">03</span> Pareto e Priorização</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Construção e validação</div>
+      <a class="sidebar-link" href="codificacao.html"><span class="sidebar-num">04</span> Codificação do humano</a>
+      <a class="sidebar-link" href="primitivas.html"><span class="sidebar-num">05</span> Primitivas agênticas</a>
+      <a class="sidebar-link" href="experimento.html"><span class="sidebar-num">06</span> Experimento em campo</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Escala e composição</div>
+      <a class="sidebar-link" href="escala.html"><span class="sidebar-num">07</span> Escala e operação</a>
+      <a class="sidebar-link" href="evolucao.html"><span class="sidebar-num">08</span> Evolução contínua</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Apêndices</div>
+      <a class="sidebar-link" href="diferenciais.html"><span class="sidebar-num">A</span> Diferenciais</a>
+      <a class="sidebar-link" href="squad.html"><span class="sidebar-num">B</span> Squad sugerida</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="content-wrap">
+      <section class="page" data-toc='[
+        {"id":"f5-vocab","label":"O vocabulário das primitivas"},
+        {"id":"f5-decompor","label":"Como decompor"},
+        {"id":"f5-design","label":"Decisões de design"},
+        {"id":"f5-saida","label":"Saída"}
+      ]'>
+        <div class="eyebrow">Fase 05 · Construção e validação</div>
+        <h1 class="display-title">Tradução para <em>primitivas agênticas</em></h1>
+        <p class="lead">Transformar conhecimento humano codificado em skills, agentes e orquestração — com pontos de <em>human-in-the-loop</em> e fallback explicitamente desenhados.</p>
+
+        <h2 id="f5-vocab">O vocabulário que organiza a tradução</h2>
+        <p>Antes de traduzir, é preciso o vocabulário comum. Cinco primitivas, em ordem do menor para o maior:</p>
+
+        <div style="display:grid;gap:10px;margin:20px 0;">
+          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 01</div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Tool</div>
+            <div style="font-size:14px;color:var(--text-2);">Uma capacidade técnica isolada — chamar uma API, ler um PDF, consultar um banco, fazer OCR. É <em>infraestrutura</em>.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 02</div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Skill</div>
+            <div style="font-size:14px;color:var(--text-2);">Uma unidade de competência codificada (no padrão SKILL.md). Uma habilidade humana traduzida em instruções executáveis, normalmente combinando uma ou mais tools.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 03</div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Agent</div>
+            <div style="font-size:14px;color:var(--text-2);">Um especialista com responsabilidade clara, que possui um conjunto de skills e tools e toma decisões dentro do seu domínio. Ex.: <em>Especialista Documental</em>, <em>Especialista Cadastral</em>.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 04</div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Orquestração</div>
+            <div style="font-size:14px;color:var(--text-2);">A lógica que coordena agentes: o que roda em paralelo, o que é sequencial, quando faz fan-out/fan-in, e onde para para consultar humano.</div>
+          </div>
+          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--coral);font-weight:600;margin-bottom:4px;">PRIMITIVA · 05</div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">Command / Blueprint do processo</div>
+            <div style="font-size:14px;color:var(--text-2);">A expressão de alto nível de uma jornada completa, que invoca a orquestração. É o equivalente ao <em>playbook</em> do operador.</div>
+          </div>
+        </div>
+
+        <h2 id="f5-decompor">Como decompor</h2>
+        <p>Vai-se da documentação executável da Fase 4 com três cortes:</p>
+        <ul>
+          <li><strong>Corte por capacidade</strong> — cada unidade atômica de trabalho da Fase 4 vira candidata a skill. Nem toda unidade vira skill (algumas são triviais demais e viram instrução dentro de outra), mas o exercício força clareza.</li>
+          <li><strong>Corte por domínio</strong> — skills que pertencem a um mesmo domínio (documental, jurídico, cadastral) se agrupam sob um agente especializado.</li>
+          <li><strong>Corte por nível de risco/criticidade</strong> — onde a decisão tem alto impacto ou irreversibilidade, marca-se um ponto de <strong>human-in-the-loop</strong>. Não como concessão à IA imatura, mas como <em>design deliberado</em>.</li>
+        </ul>
+
+        <h2 id="f5-design">Decisões de design que precisam estar explícitas</h2>
+        <p>Cinco perguntas que precisam de resposta <strong>escrita</strong> nesta fase, porque vão ser cobradas na hora de construir:</p>
+        <ol>
+          <li><strong>Paralelo ou sequencial?</strong> Quais agentes podem rodar simultaneamente sem dependência mútua, e quais precisam esperar saída de outro? Latência e custo dependem disso.</li>
+          <li><strong>Que contexto cada skill/agent precisa?</strong> Manual do produto, política interna, exemplos históricos, base de exceções. Cada um entra como RAG, prompt fixo, ou parâmetro. Definir aqui evita retrabalho.</li>
+          <li><strong>Onde está o human-in-the-loop e qual o contrato?</strong> Não basta dizer "o humano valida". Qual é o input que ele recebe, em que formato, com que prazo, e como sua resposta retorna ao fluxo?</li>
+          <li><strong>Como cada skill é avaliada?</strong> Cada skill precisa do seu próprio critério de qualidade — porque é assim que se mede e se evolui depois. Conecta com a instrumentação por <em>default</em> da Fase 6.</li>
+          <li><strong>Modelo de fallback?</strong> O que acontece quando uma skill devolve baixa confiança ou erra? Escala? Reexecuta com outro modelo? Vai para HITL? Cada caminho precisa ser desenhado.</li>
+        </ol>
+
+        <div class="callout coral">
+          <div class="callout-title">↻ O ciclo Fase 5 ↔ Fase 6</div>
+          <p>O blueprint desta fase é a <strong>melhor hipótese antes da equipe entrar em campo</strong>. Na Fase 6, parte dele <em>vai</em> ser revisto — a operação real sempre revela arestas que a entrevista não pegou. Esse retorno da Fase 6 para a Fase 5 (e às vezes para a Fase 4) é o coração do ciclo iterativo.</p>
+        </div>
+
+        <h2 id="f5-saida">Saída</h2>
+        <div class="output-box">
+          <div class="output-label">Artefato desta fase</div>
+          <p>Um <strong>blueprint agêntico executável</strong>:</p>
+          <ul>
+            <li>Catálogo de tools;</li>
+            <li>Catálogo de skills (cada uma com seu SKILL.md);</li>
+            <li>Catálogo de agentes (cada um com suas skills associadas);</li>
+            <li>Diagrama de orquestração;</li>
+            <li>Pontos de HITL marcados;</li>
+            <li>E — importante — a lista do que <strong>não</strong> está no escopo da primeira iteração, deixando claro o que fica para as voltas seguintes.</li>
+          </ul>
+        </div>
+
+        <div class="page-nav">
+          <a class="page-nav-link" href="codificacao.html"><div class="page-nav-label">← Anterior</div><div class="page-nav-title">Codificação do humano</div></a>
+          <a class="page-nav-link next" href="experimento.html"><div class="page-nav-label">Próxima fase →</div><div class="page-nav-title">Experimento em campo</div></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="toc" id="toc">
+    <div class="toc-label">Nesta página</div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="footer">
+    <span class="footer-strong">Reinvenção Agêntica de Processos</span> — Um framework para repensar processos operacionais a partir de mentalidade <em>future-back</em>.
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
