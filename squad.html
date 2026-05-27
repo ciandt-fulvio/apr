@@ -54,9 +54,7 @@
   <main>
     <div class="content-wrap">
       <section class="page" data-toc='[
-        {"id":"s-principio","label":"Princípio de dimensionamento"},
-        {"id":"s-parceiro","label":"Lado do parceiro"},
-        {"id":"s-cliente","label":"Lado da organização"}
+        {"id":"s-principio","label":"Princípio de dimensionamento"}
       ]'>
         <div class="eyebrow">Apêndice B</div>
         <h1 class="display-title">Squad <em>sugerida</em></h1>
@@ -65,36 +63,27 @@
         <h2 id="s-principio">Princípio de dimensionamento</h2>
         <p>A tentação clássica é montar time inflado, com PMO, vários gerentes, várias frentes. O princípio aqui é o contrário: <strong>squad enxuta, autonomia alta, ciclo curto</strong>. A IA absorve boa parte do que normalmente exigiria mais gente.</p>
 
-        <h2 id="s-parceiro">Lado do parceiro de transformação</h2>
-        <div style="display:grid;gap:14px;margin:20px 0;">
-          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
-            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Orquestrador <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
-            <div style="font-size:14px;color:var(--text-2);">Lidera o método, conduz a Fase 2, garante coerência entre fases. É a referência metodológica do projeto.</div>
+        <div class="squad-grid">
+          <div class="squad-col">
+            <h4>Parceiro de transformação</h4>
+            <ul>
+              <li><strong>Orquestrador</strong> · 1 pessoa<br>Lidera o método, conduz o processo, garante coerência entre as fases. É a referência metodológica do projeto.</li>
+              <li><strong>AI Engineers</strong> · 2 pessoas<br>Perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final. São quem executa as Fases 4 a 6 em campo.</li>
+              <li><strong>AIX</strong> · 1 pessoa<br>Desenho de interação humano-agente, especialmente nos pontos de HITL. Garante que a experiência da operação com a IA seja desenhada, não improvisada.</li>
+            </ul>
           </div>
-          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
-            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Engenheiros Embedados <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 a 2 pessoas</span></div>
-            <div style="font-size:14px;color:var(--text-2);">Perfil sênior que combina engenharia, sensibilidade de produto e capacidade de operar lado a lado com o usuário final. São quem executa as Fases 4 a 6 em campo.</div>
+          <div class="squad-col">
+            <h4>Organização cliente</h4>
+            <ul>
+              <li><strong>PM / Owner do processo</strong><br>Fonte de verdade sobre objetivos e prioridades. Decide os trade-offs que não podem ser decididos pela squad sozinha.</li>
+              <li><strong>Acesso garantido aos operadores reais</strong><br>Não é um papel — é uma <strong>condição contratual</strong>. Sem isso, o modelo embedado da Fase 6 simplesmente não funciona.</li>
+            </ul>
           </div>
-          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
-            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">AIX <span style="font-weight:400;color:var(--text-3);font-size:13px;">· 1 pessoa</span></div>
-            <div style="font-size:14px;color:var(--text-2);">Desenho de interação humano-agente, especialmente nos pontos de HITL. Garante que a experiência da operação com a IA seja desenhada, não improvisada.</div>
-          </div>
-        </div>
-        <div class="callout">
-          <div class="callout-title">ℹ Por que não há um "AI Product Specialist" separado</div>
-          <p>Esse papel <strong>se dissolve dentro do Engenheiro Embedado</strong> — que já é, por natureza, a capacidade de pensar agenticamente que costuma faltar no lado do cliente.</p>
         </div>
 
-        <h2 id="s-cliente">Lado da organização cliente</h2>
-        <div style="display:grid;gap:14px;margin:20px 0;">
-          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
-            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">PM / dono(s) do processo</div>
-            <div style="font-size:14px;color:var(--text-2);">Fonte de verdade sobre objetivos e prioridades. Decide os trade-offs que não podem ser decididos pela squad sozinha.</div>
-          </div>
-          <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px 22px;">
-            <div style="font-weight:700;color:var(--navy);margin-bottom:6px;">Acesso garantido aos operadores reais</div>
-            <div style="font-size:14px;color:var(--text-2);">Não é um papel — é uma <strong>condição contratual</strong>. Sem isso, o modelo embedado da Fase 6 simplesmente não funciona.</div>
-          </div>
+        <div class="callout">
+          <div class="callout-title">ℹ Por que não há um "AI Product Specialist" separado</div>
+          <p>Esse papel <strong>se dissolve dentro do AI Engineer</strong> — que já é, por natureza, a capacidade de pensar agenticamente que costuma faltar no lado do cliente.</p>
         </div>
 
         <div class="page-nav">
