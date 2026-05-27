@@ -4,6 +4,15 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
   if (link.getAttribute('href') === filename) link.classList.add('active');
 });
 
+// Preserve sidebar scroll position across page navigations
+const sidebar = document.getElementById('sidebar');
+const SIDEBAR_SCROLL_KEY = 'sidebarScrollTop';
+const savedScroll = sessionStorage.getItem(SIDEBAR_SCROLL_KEY);
+if (savedScroll) sidebar.scrollTop = parseInt(savedScroll, 10);
+sidebar.addEventListener('scroll', () => {
+  sessionStorage.setItem(SIDEBAR_SCROLL_KEY, sidebar.scrollTop);
+});
+
 // Build TOC from data-toc attribute on .page
 function buildToc() {
   const tocList = document.getElementById('tocList');
