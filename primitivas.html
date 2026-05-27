@@ -94,7 +94,7 @@
         </div>
 
         <h2 id="f5-decompor">Como decompor</h2>
-        <p>Vai-se da documentação executável da Fase 4 com três cortes:</p>
+        <p>A decomposição parte da documentação da Fase 4 em três cortes:</p>
         <ul>
           <li><strong>Corte por capacidade</strong> — cada unidade atômica de trabalho da Fase 4 vira candidata a skill. Nem toda unidade vira skill (algumas são triviais demais e viram instrução dentro de outra), mas o exercício força clareza.</li>
           <li><strong>Corte por domínio</strong> — skills que pertencem a um mesmo domínio (documental, jurídico, cadastral) se agrupam sob um agente especializado.</li>
@@ -102,7 +102,7 @@
         </ul>
 
         <h2 id="f5-design">Decisões de design que precisam estar explícitas</h2>
-        <p>Cinco perguntas que precisam de resposta <strong>escrita</strong> nesta fase, porque vão ser cobradas na hora de construir:</p>
+        <p>Cinco perguntas com resposta <strong>escrita</strong> antes da equipe entrar em campo — porque todas vão ser cobradas na hora de construir:</p>
         <ol>
           <li><strong>Paralelo ou sequencial?</strong> Quais agentes podem rodar simultaneamente sem dependência mútua, e quais precisam esperar saída de outro? Latência e custo dependem disso.</li>
           <li><strong>Que contexto cada skill/agent precisa?</strong> Manual do produto, política interna, exemplos históricos, base de exceções. Cada um entra como RAG, prompt fixo, ou parâmetro. Definir aqui evita retrabalho.</li>

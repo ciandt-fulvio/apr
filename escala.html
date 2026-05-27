@@ -71,7 +71,7 @@
           <li>A propriedade sai do engenheiro embedado para a <strong>operação</strong>;</li>
           <li>O trabalho das pessoas envolvidas no processo <strong>muda — às vezes drasticamente</strong>.</li>
         </ul>
-        <p>Tratar essas três como uma coisa só é receita para retrabalho. Cada uma é um <em>workstream</em>.</p>
+        <p>Tratar as três como uma coisa só é receita para retrabalho. Cada uma é um workstream independente.</p>
 
         <h2 id="f7-hardening">Hardening técnico (a parte óbvia)</h2>
         <p>O experimento da Fase 6 foi otimizado para aprendizado, não para 24/7. Aqui ele precisa ganhar:</p>
@@ -81,7 +81,7 @@
           <li><strong>Performance e custo sob escala real</strong> — latência, throughput, e — relevante para IA — custo por execução, que pode estourar quando o volume explode.</li>
           <li><strong>Segurança e auditoria</strong> — rastreabilidade de cada decisão tomada por cada agente, especialmente em processos regulados.</li>
         </ul>
-        <p>A nuance específica de sistemas agênticos: <strong>avaliação de qualidade da saída continua rodando em produção</strong>, não só no laboratório — porque modelos derivam, dados de entrada mudam, e o que funcionava semana passada pode estar degradando hoje.</p>
+        <p>Um ponto específico de sistemas agênticos: <strong>a avaliação de qualidade continua rodando em produção</strong>, não apenas no laboratório. Modelos derivam, dados de entrada mudam. O que funcionava semana passada pode estar degradando hoje.</p>
 
         <h2 id="f7-change">Change management como workstream explícito</h2>
         <p>Quando um agente assume parte do trabalho que era de 200 pessoas, o <em>job description</em> dessas pessoas <strong>muda</strong>:</p>
@@ -94,17 +94,17 @@
           <div class="callout-title">⚠ O risco silencioso</div>
           <p>Se isso não for desenhado, ou vira <strong>ruído cultural</strong> ("a IA tá tomando nosso trabalho") ou vira <strong>gargalo operacional</strong> (o agente entrega rápido demais para o resto da operação acompanhar).</p>
         </div>
-        <p>O parceiro de transformação não necessariamente executa esse workstream — mas precisa <strong>forçar a conversa</strong> com o cliente: quem do lado da organização é dono da redefinição de papéis? Qual o plano de comunicação? Que treinamento as pessoas precisam? Sem nomes, prazos e responsáveis, a Fase 7 fica capenga.</p>
+        <p>O parceiro de transformação não necessariamente executa esse workstream, mas precisa <strong>forçar a conversa</strong>: quem é o owner da redefinição de papéis? Qual o plano de comunicação? Que treinamento as pessoas precisam? Sem nomes e prazos, a Fase 7 fica capenga.</p>
 
-        <h2 id="f7-governanca">Governança e propriedade pós-rollout</h2>
-        <p>Outra pergunta que precisa de resposta <strong>antes</strong> do rollout, não depois: <strong>quem é dono do sistema em produção?</strong> O time embedado da Fase 6 não pode ficar sustentando indefinidamente — ele precisa rodar para a próxima iteração.</p>
+        <h2 id="f7-governanca">Ownership e governança pós-rollout</h2>
+        <p>Pergunta que precisa de resposta <strong>antes</strong> do rollout: <strong>quem é owner do sistema em produção?</strong> O time embedado da Fase 6 não pode sustentar indefinidamente — ele precisa rodar para a próxima iteração.</p>
         <p>As três opções típicas:</p>
         <ol>
           <li><strong>Cliente assume com squad própria</strong>, com o parceiro em sustentação leve.</li>
           <li><strong>Parceiro mantém squad de run dedicada</strong>, no modelo comercial de fixed-price na transformação + squad de run com compromisso de métricas DORA/SPACE.</li>
           <li><strong>Modelo híbrido</strong>.</li>
         </ol>
-        <p>A escolha é <em>estratégica e comercial</em> — não técnica — e precisa estar decidida antes do rollout.</p>
+        <p>A escolha é estratégica e comercial, não técnica. Precisa estar decidida antes do rollout.</p>
 
         <h2 id="f7-rollout">Estratégia de rollout</h2>
         <p>Para processos de volume e criticidade altos, raramente faz sentido <em>big bang</em>. O padrão saudável é <strong>canary controlado</strong>:</p>
