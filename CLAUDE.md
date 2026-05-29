@@ -16,17 +16,19 @@ python3 -m http.server 8000   # ou: npx serve .
 
 | Arquivo | Conteúdo |
 |---|---|
-| `index.html` | Home — visão geral do framework |
-| `assessment.html` | Fase 01 — Assessment Agêntico |
-| `future-back.html` | Fase 02 — Visão Future-Back |
-| `priorizacao.html` | Fase 03 — Pareto e Priorização |
-| `codificacao.html` | Fase 04 — Codificação do humano |
-| `primitivas.html` | Fase 05 — Primitivas agênticas |
-| `experimento.html` | Fase 06 — Experimento em campo |
-| `escala.html` | Fase 07 — Escala e operação |
-| `evolucao.html` | Fase 08 — Evolução contínua |
-| `diferenciais.html` | Apêndice A — Diferenciais |
-| `squad.html` | Apêndice B — Squad sugerida |
+| `index.html` | Home — visão geral do framework (única página na raiz) |
+| `pages/assessment.html` | Fase 01 — Assessment Agêntico |
+| `pages/future-back.html` | Fase 02 — Visão Future-Back |
+| `pages/priorizacao.html` | Fase 03 — Pareto e Priorização |
+| `pages/codificacao.html` | Fase 04 — Codificação do humano |
+| `pages/primitivas.html` | Fase 05 — Primitivas agênticas |
+| `pages/experimento.html` | Fase 06 — Experimento em campo |
+| `pages/escala.html` | Fase 07 — Escala e operação |
+| `pages/evolucao.html` | Fase 08 — Evolução contínua |
+| `pages/diferenciais.html` | Apêndice A — Diferenciais |
+| `pages/squad.html` | Apêndice B — Squad sugerida |
+
+`index.html` fica na raiz; todas as demais páginas ficam em `pages/`.
 
 ## Arquitetura
 
@@ -36,8 +38,10 @@ python3 -m http.server 8000   # ou: npx serve .
 
 ## Convenções
 
-- **Topbar + sidebar + footer são duplicados** em cada arquivo HTML (não há template engine). Ao adicionar uma página, copiar um arquivo existente e **atualizar a `<nav class="sidebar">` em todos os arquivos** para manter a navegação consistente.
-- **Links de navegação são `href` relativos** (`href="assessment.html"`), não `data-route`. Não reintroduzir SPA routing.
+- **Topbar + sidebar + footer são duplicados** em cada arquivo HTML (não há template engine). Ao adicionar uma página, copiar um arquivo existente (de `pages/`) e **atualizar a `<nav class="sidebar">` em todos os arquivos** para manter a navegação consistente.
+- **Links de navegação são `href` relativos**, não `data-route` (não reintroduzir SPA routing). Como `index.html` está na raiz e as páginas em `pages/`, os caminhos diferem por origem:
+  - de `index.html` → páginas: `href="pages/assessment.html"`; assets: `href="assets/..."`.
+  - de uma página em `pages/` → outra página (irmã): `href="future-back.html"`; → Home: `href="../index.html"`; → assets: `href="../assets/..."`.
 - **TOC**: cada `<section class="page">` tem um atributo `data-toc` com array JSON de `{"id","label"}`. O JS constrói o TOC direito automaticamente; os `id`s devem corresponder aos `h2`/`h3` da página.
 - **Links de página anterior/próxima** ficam num `<div class="page-nav">` no final de cada `<section>`. O link da direita leva `.next` (alinhado à direita via CSS).
 - Manter sem dependências externas além do Google Fonts, a menos que o usuário peça explicitamente.
