@@ -57,6 +57,7 @@
         {"id":"f4-quem","label":"Quem observar"},
         {"id":"f4-capturar","label":"O que capturar"},
         {"id":"f4-como","label":"Como capturar"},
+        {"id":"f4-anthropic","label":"Ferramentas: Desktop e Projects"},
         {"id":"f4-saida","label":"Saída"}
       ]'>
         <div class="eyebrow">Fase 04 · Construção e validação</div>
@@ -88,6 +89,12 @@
           <li><strong>Shadowing reverso</strong> — o observador tenta executar o trabalho com base no que entendeu, e o operador corrige. O que ele corrige é exatamente o que estava implícito.</li>
         </ol>
         <p>O agente entrevistador da Fase 1 entra aqui também, principalmente nas entrevistas em escala. Mas a <strong>observação presencial ao vivo</strong> não tem substituto nessa fase.</p>
+
+        <h2 id="f4-anthropic">Ferramentas que dão robustez à captura</h2>
+        <ul>
+          <li><strong>Claude Desktop + MCP Filesystem</strong> — processar as transcrições das sessões com top performers direto do sistema de arquivos local, sem expor dado sensível a serviço externo. Importa quando o processo é regulado ou trafega PII: a extração de padrões acontece sobre o material bruto, mas ele não sai da máquina.</li>
+          <li><strong>Projects como repositório de conhecimento codificado</strong> — cada sessão de codificação alimenta uma knowledge base estruturada, com <em>custom instructions</em> orientadas a extrair decisões, critérios e exceções. O "caderno de campo" deixa de ser anotação solta e vira base consultável — já no pré-formato que encurta a Fase 5.</li>
+        </ul>
 
         <h2 id="f4-saida">Saída</h2>
         <div class="output-box">

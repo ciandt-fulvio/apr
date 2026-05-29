@@ -57,6 +57,7 @@
         {"id":"f6-modelo","label":"O modelo embedado"},
         {"id":"f6-caracteristicas","label":"Três características"},
         {"id":"f6-regra","label":"A regra prática"},
+        {"id":"f6-anthropic","label":"Ferramentas Anthropic"},
         {"id":"f6-saida","label":"Saída"}
       ]'>
         <div class="eyebrow">Fase 06 · Construção e validação</div>
@@ -80,6 +81,12 @@
           <p>Boa parte do refinamento fino das skills (uma volta de volta à Fase 4) só emerge quando o engenheiro embedado <em>vê</em> o atalho que o melhor operador toma e que ninguém documentou — e codifica isso no momento em que vê.</p>
         </div>
         <p>É essa proximidade que valida o investimento das Fases 4 e 5: há um padrão para refinar, não um esboço para inventar do zero em campo.</p>
+
+        <h2 id="f6-anthropic">Ferramentas que sustentam o experimento</h2>
+        <ul>
+          <li><strong>Claude Cowork</strong> — o experimento roda como tarefa autônoma, com log de decisões e aprovação humana embutida. O HITL desenhado na Fase 5 vira mecanismo nativo da plataforma, não um processo manual rodando em paralelo.</li>
+          <li><strong>Scheduled Tasks</strong> — monitoramento automatizado: o relatório de progresso (qualidade, custo, latência, esforço economizado) é gerado a cada N dias sem intervenção manual. É a instrumentação por <em>default</em> ganhando cadência própria, em vez de depender de alguém lembrar de medir.</li>
+        </ul>
 
         <h2 id="f6-saida">Saída</h2>
         <div class="output-box">

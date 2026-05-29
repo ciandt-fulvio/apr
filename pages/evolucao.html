@@ -56,6 +56,7 @@
       <section class="page" data-toc='[
         {"id":"f8-natureza","label":"A fase que diferencia"},
         {"id":"f8-modelos","label":"Reavaliação de modelos"},
+        {"id":"f8-anthropic","label":"Ferramenta: Evaluation Tool"},
         {"id":"f8-repo","label":"Repositório de skills"},
         {"id":"f8-cross","label":"Alavanca cross-process"},
         {"id":"f8-loop","label":"O loop de volta"},
@@ -76,6 +77,10 @@
           <li>Sem refazer arquitetura.</li>
         </ul>
         <p>Esse mecanismo precisa virar <strong>infraestrutura padrão</strong>, não construção custom por projeto. Cada agente vai para produção com um conjunto de execuções de referência arquivadas; novos modelos são testados contra esse conjunto automaticamente; a troca, quando vale, vira decisão de governança.</p>
+
+        <h2 id="f8-anthropic">A ferramenta que torna a evolução mensurável: Evaluation Tool</h2>
+        <p>O <strong>Evaluation Tool</strong> (no Claude Console → aba "Evaluate") é a infraestrutura padrão que esse mecanismo pede. Compara versões de primitivas e skills ao longo das iterações com test cases estruturados, grade quantitativa (escala de 1 a 5) e comparação <em>side-by-side</em>. É o que confirma que uma versão nova de skill — ou um modelo novo — <strong>realmente</strong> melhorou o output, e não apenas "parece melhor".</p>
+        <p>Quando o caso exige, complementa-se via API: <em>LLM-as-judge</em> (Likert, binário ou ordinal) e o padrão pass@k vs. pass^k para avaliar agentes. Assim a decisão de versionar ou trocar um modelo deixa de ser percepção e vira número defensável diante da governança.</p>
 
         <h2 id="f8-repo">O repositório de skills como ativo institucional vivo</h2>
         <p>Codificar a melhor prática humana em skills muda a <strong>economia do conhecimento</strong> dentro da organização:</p>

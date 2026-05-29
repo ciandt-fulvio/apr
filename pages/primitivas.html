@@ -57,6 +57,7 @@
         {"id":"f5-vocab","label":"O vocabulário das primitivas"},
         {"id":"f5-decompor","label":"Como decompor"},
         {"id":"f5-design","label":"Decisões de design"},
+        {"id":"f5-anthropic","label":"Ferramentas Anthropic"},
         {"id":"f5-saida","label":"Saída"}
       ]'>
         <div class="eyebrow">Fase 05 · Construção e validação</div>
@@ -116,6 +117,13 @@
           <div class="callout-title">↻ O ciclo Fase 5 ↔ Fase 6</div>
           <p>O blueprint desta fase é a <strong>melhor hipótese antes da equipe entrar em campo</strong>. Na Fase 6, parte dele <em>vai</em> ser revisto — a operação real sempre revela arestas que a entrevista não pegou. Esse retorno da Fase 6 para a Fase 5 (e às vezes para a Fase 4) é o coração do ciclo iterativo.</p>
         </div>
+
+        <h2 id="f5-anthropic">Ferramentas que materializam as primitivas</h2>
+        <ul>
+          <li><strong>Agent Skills (open standard, dez/2025)</strong> — as skills do framework podem ser entregues literalmente nesse formato, compatível com Claude.ai, Claude Code, Cursor e Gemini CLI. O <code style="background:rgba(0,0,80,0.06);color:var(--navy-3);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">SKILL.md</code> deixa de ser metáfora e vira o formato real — o entregável da fase ganha um padrão técnico de indústria, reutilizável além do engagement.</li>
+          <li><strong>Claude Design</strong> — desenhar a interface humano-agente, em especial os pontos de HITL (a pergunta 3 das decisões de design), antes de codar. O resultado sai como <em>handoff bundle</em> para implementação direta.</li>
+          <li><strong>Cowork</strong> — testar a primitiva em contexto real antes de validar com o cliente, sem montar um ambiente separado para isso.</li>
+        </ul>
 
         <h2 id="f5-saida">Saída</h2>
         <div class="output-box">
