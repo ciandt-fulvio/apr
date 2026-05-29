@@ -117,13 +117,13 @@
         </ul>
         <p>Esse modelo dá ao change management <strong>tempo de respirar</strong> e permite reverter rapidamente se algo degrada.</p>
 
-        <h2 id="f7-anthropic">Claude Code como runtime de operação</h2>
-        <p>É a ponte natural do protótipo validado na Fase 6 (rodando no Cowork) para a produção operada. O Claude Code não é só ferramenta de desenvolvimento — é runtime de agentes operacionais, e cobre o hardening desta fase:</p>
+        <h2 id="f7-anthropic">Operação com Claude Code</h2>
+        <p>Na passagem do protótipo da Fase 6 (que rodava no Cowork) para a produção, o Claude Code costuma assumir a execução: além do uso em desenvolvimento, ele roda como runtime dos agentes em operação. Os recursos que importam aqui:</p>
         <ul>
-          <li><strong>Headless (<code style="background:rgba(0,0,80,0.06);color:var(--navy-3);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">claude -p</code>)</strong> — roda em CI, cron e pipelines, com output estruturado (JSON/schema) e custo rastreável por invocação. Liga direto na observabilidade e no controle de custo por execução.</li>
-          <li><strong>Agent SDK (Python/TS)</strong> — a mesma <em>agent loop</em> e gestão de contexto do Claude Code, agora programável; base para construir os agentes de operação em produção.</li>
-          <li><strong>Subagents + Dynamic Workflows</strong> — orquestração de dezenas a centenas de agentes por run, com padrões de qualidade repetíveis (ex.: verificação adversarial entre agentes).</li>
-          <li><strong>Routines (cloud)</strong> — config salva do Claude Code rodando na infra da Anthropic, sem depender de máquina local. Gatilhos por agenda, API (HTTP POST) ou GitHub (PR/push/release); cada run em container fresco, commitando em branches <code style="background:rgba(0,0,80,0.06);color:var(--navy-3);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">claude/</code> ou abrindo PR. Útil para os agentes de operação que disparam por evento, não por pessoa.</li>
+          <li><strong>Modo headless (<code style="background:rgba(0,0,80,0.06);color:var(--navy-3);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">claude -p</code>)</strong> — roda em CI, cron e pipelines, com saída estruturada (JSON/schema) e custo rastreável por invocação. Conecta com a observabilidade e o controle de custo por execução tratados no hardening.</li>
+          <li><strong>Agent SDK (Python/TS)</strong> — a mesma <em>agent loop</em> e gestão de contexto do Claude Code, de forma programável; usado para construir os agentes de operação em produção.</li>
+          <li><strong>Subagents e dynamic workflows</strong> — orquestram dezenas a centenas de agentes por execução, com padrões de qualidade repetíveis (por exemplo, verificação cruzada entre agentes).</li>
+          <li><strong>Routines</strong> — uma configuração salva do Claude Code que roda na nuvem, sem depender de máquina local. Disparam por agenda, por API (HTTP POST) ou por evento de GitHub (PR, push, release); cada execução acontece em container isolado e termina commitando em branches <code style="background:rgba(0,0,80,0.06);color:var(--navy-3);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">claude/</code> ou abrindo PR. Atende os casos em que a operação dispara por evento, não por uma pessoa.</li>
         </ul>
 
         <h2 id="f7-saida">Saída</h2>

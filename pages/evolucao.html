@@ -78,9 +78,9 @@
         </ul>
         <p>Esse mecanismo precisa virar <strong>infraestrutura padrão</strong>, não construção custom por projeto. Cada agente vai para produção com um conjunto de execuções de referência arquivadas; novos modelos são testados contra esse conjunto automaticamente; a troca, quando vale, vira decisão de governança.</p>
 
-        <h2 id="f8-anthropic">A ferramenta que torna a evolução mensurável: Evaluation Tool</h2>
-        <p>O <strong>Evaluation Tool</strong> (no Claude Console → aba "Evaluate") é a infraestrutura padrão que esse mecanismo pede. Compara versões de primitivas e skills ao longo das iterações com test cases estruturados, grade quantitativa (escala de 1 a 5) e comparação <em>side-by-side</em>. É o que confirma que uma versão nova de skill — ou um modelo novo — <strong>realmente</strong> melhorou o output, e não apenas "parece melhor".</p>
-        <p>Quando o caso exige, complementa-se via API: <em>LLM-as-judge</em> (Likert, binário ou ordinal) e o padrão pass@k vs. pass^k para avaliar agentes. Assim a decisão de versionar ou trocar um modelo deixa de ser percepção e vira número defensável diante da governança.</p>
+        <h2 id="f8-anthropic">Medição das versões: Evaluation Tool</h2>
+        <p>Para a comparação descrita acima usamos o <strong>Evaluation Tool</strong> (no Claude Console, aba "Evaluate"). Ele roda versões de primitivas e skills contra um conjunto de test cases e mostra os resultados lado a lado, com uma nota por caso. Serve para verificar se uma versão nova de skill — ou um modelo novo — de fato melhorou o output em relação à anterior, em vez de decidir por impressão.</p>
+        <p>Quando o caso pede mais critério, a avaliação se estende via API: <em>LLM-as-judge</em> (Likert, binário ou ordinal) e o padrão pass@k vs. pass^k para agentes. Com isso, a decisão de versionar ou trocar um modelo se apoia em número, não em percepção.</p>
 
         <h2 id="f8-repo">O repositório de skills como ativo institucional vivo</h2>
         <p>Codificar a melhor prática humana em skills muda a <strong>economia do conhecimento</strong> dentro da organização:</p>
